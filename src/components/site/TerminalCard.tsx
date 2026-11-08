@@ -18,7 +18,7 @@ export function TerminalCard() {
         <span className="size-2.5 rounded-full bg-ink-border" />
         <span className="size-2.5 rounded-full bg-ink-border" />
         <span className="size-2.5 rounded-full bg-primary-glow" />
-        <span className="ml-3 font-mono text-xs text-ink-muted">~/platform — zsh · illustrative</span>
+        <span className="ml-3 font-mono text-xs text-ink-muted">~/platform · zsh · illustrative</span>
       </div>
       <pre className="overflow-x-auto px-5 py-5 font-mono text-[0.78rem] leading-7">
         {lines.map((l, i) => (

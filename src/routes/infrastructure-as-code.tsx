@@ -6,7 +6,7 @@ import { seo } from "@/lib/seo";
 const pillar = getPillar("infrastructure-as-code");
 
 export const Route = createFileRoute("/infrastructure-as-code")({
-  head: () => ({ meta: seo(`${pillar.title} — Nehla K J, Cloud DevOps Engineer`, pillar.seoDescription) }),
+  head: () => ({ meta: seo(`${pillar.title} | Nehla K J, Cloud DevOps Engineer`, pillar.seoDescription) }),
   component: Page,
 });
 

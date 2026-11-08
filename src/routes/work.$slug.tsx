@@ -17,9 +17,9 @@ export const Route = createFileRoute("/work/$slug")({
     return { study };
   },
   head: ({ loaderData }) => {
-    if (!loaderData) return { meta: [{ title: "Case study not found — Nehla K J" }, { name: "robots", content: "noindex" }] };
+    if (!loaderData) return { meta: [{ title: "Case study not found | Nehla K J" }, { name: "robots", content: "noindex" }] };
     const { study } = loaderData;
-    return { meta: seo(`${study.title} — Nehla K J case study`, study.summary, "article") };
+    return { meta: seo(`${study.title} | Nehla K J case study`, study.summary, "article") };
   },
   notFoundComponent: () => (
     <PageShell cta={false}>
@@ -51,7 +51,7 @@ function CaseStudyPage() {
             to={`/${pillar.slug}`}
             className="inline-flex items-center gap-2 font-mono text-xs text-ink-muted transition-colors hover:text-ink-foreground"
           >
-            <ArrowLeft className="size-3.5" /> {pillar.number} — {pillar.title}
+            <ArrowLeft className="size-3.5" /> {pillar.number} · {pillar.title}
           </Link>
           <Reveal className="mt-8">
             <span className="flex flex-wrap items-center gap-2">

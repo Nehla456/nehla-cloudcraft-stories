@@ -8,7 +8,7 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { PageShell } from "@/components/site/PageShell";
 import { Reveal } from "@/components/site/Reveal";
-import { contactVerified, profile } from "@/data/portfolio";
+import { certifications, contactVerified, profile } from "@/data/portfolio";
 import { CvActions } from "@/components/site/CvActions";
 import { PlaceholderTag } from "@/components/site/Placeholder";
 import { seo } from "@/lib/seo";
@@ -16,7 +16,7 @@ import { seo } from "@/lib/seo";
 export const Route = createFileRoute("/contact")({
   head: () => ({
     meta: seo(
-      "Let's talk — Nehla K J, Cloud DevOps Engineer",
+      "Let's talk | Nehla K J, Cloud DevOps Engineer",
       "Hire Nehla K J for cloud platform, CI/CD, Terraform and DevSecOps work in banking, healthcare and aerospace.",
     ),
   }),
@@ -46,7 +46,7 @@ function ContactPage() {
     setErrors({});
     const { name, email, company, message } = parsed.data;
     const subject = `Project enquiry from ${name}${company ? ` (${company})` : ""}`;
-    const body = `${message}\n\n— ${name}\n${email}${company ? `\n${company}` : ""}`;
+    const body = `${message}\n\n${name}\n${email}${company ? `\n${company}` : ""}`;
     window.location.href = `mailto:${profile.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
   }
 
@@ -61,7 +61,7 @@ function ContactPage() {
               Got something slow, fragile or <span className="text-gradient">expensive?</span>
             </h1>
             <p className="mt-6 max-w-md text-lg text-ink-muted">
-              Send me the problem and I'll tell you what I'd look at first. Based in {profile.location}. {profile.workAuth}.
+              Send me the problem and I'll tell you what I'd look at first. Based in {profile.location}. {profile.workAuth}. {profile.languages}.
             </p>
             <ul className="mt-10 space-y-3">
               {[
@@ -89,6 +89,14 @@ function ContactPage() {
             </ul>
             <div className="mt-10 flex flex-wrap gap-3">
               <CvActions />
+            </div>
+            <div className="mt-10 border-t border-ink-border pt-6">
+              <p className="eyebrow text-ink-muted">Certification</p>
+              {certifications.map((c) => (
+                <p key={c.name} className="mt-2 font-medium">
+                  {c.name} ({c.year})
+                </p>
+              ))}
             </div>
           </Reveal>
 

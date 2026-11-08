@@ -19,18 +19,53 @@ export const profile = {
   positioning: "Cloud DevOps Engineer, AWS & Terraform | Regulated Industries (Banking, Healthcare, Aerospace)",
   location: "Paris, France",
   workAuth: "Full French work authorization",
+  languages: "Working language: English · Learning French",
   email: "nehlajaleel1003@gmail.com",
   linkedin: "https://www.linkedin.com/in/nehlakj",
   /** Set to the GitHub profile URL once shared; links stay hidden while null. */
-  github: null as string | null,
+  github: "https://github.com/Nehla456" as string | null,
 };
 
 /** Mark a contact link `true` once it is confirmed as real. Links set to null are hidden, not tagged. */
 export const contactVerified: Record<"email" | "linkedin" | "github", boolean> = {
   email: true,
   linkedin: true,
-  github: false,
+  github: true,
 };
+
+export const certifications = [{ name: "Microsoft Certified: Azure Administrator Associate", year: "2023" }];
+
+/** Internal tools built for clients, shown on the CI/CD page. */
+export const toolsBuilt: FocusBlock[] = [
+  {
+    title: "PCT MI Tool API",
+    body: "Python FastAPI service deployed to VAL. Resolved authentication, Swagger/OpenAPI and deployment issues.",
+    tags: ["Python", "FastAPI", "OpenAPI"],
+  },
+  {
+    title: "MyPlanning",
+    body: "Updated Jira SIL init, listener and scheduler scripts for multi-system selection and Jira to DataHub sync. Demoed to Airbus.",
+    tags: ["Jira SIL", "DataHub", "Scripting"],
+  },
+  {
+    title: "AIRINA archiving tool",
+    body: "New archiving capabilities and multiple operating modes (Auto, Semi-Auto, Legacy, Military, Civil), with improved runtime stability.",
+    tags: ["Archiving", "Automation", "Stability"],
+  },
+];
+
+/** How I work with clients, shown on the homepage. */
+export const clientWork = [
+  {
+    title: "Direct with stakeholders",
+    body: "Requirements, runtime issues and enhancements, worked through directly with Airbus, NatWest and Optum teams.",
+  },
+  { title: "Show the result", body: "Demos of finished work to clients and product teams, not just a ticket marked done." },
+  {
+    title: "Leave it documented",
+    body: "KT packs, installation guides, PIF documentation and Confluence runbooks the team can run without me.",
+  },
+];
 
 /** CV download. `file` is a same-origin URL; null shows only the email request. */
 export type CvConfig = { file: string | null; filename: string };
@@ -128,7 +163,7 @@ export const pillars: Pillar[] = [
     short: "CI/CD",
     headline: "Releases that take minutes, not meetings.",
     intro:
-      "I turn manual release runbooks into pipelines — one path from package to production, the same in every environment.",
+      "I turn manual release runbooks into pipelines: one path from package to production, the same in every environment.",
     seoDescription:
       "CI/CD work by Nehla K J: Jenkins, GitLab CI/CD and GitHub Actions pipelines for Airbus and a pensions platform, cutting deployment time from 2 hours to 15 minutes.",
     metrics: [
@@ -200,8 +235,8 @@ export const pillars: Pillar[] = [
     seoDescription:
       "Cloud platform and Kubernetes work by Nehla K J: AWS and Azure, EKS and on-prem Kubernetes, and serverless event-driven pipelines at 99.9% uptime.",
     metrics: [
+      { value: "14%", label: "Call misrouting fixed (NatWest contact centre)", verified: true },
       { value: "99.9%", label: "Serverless ETL uptime (NatWest)", verified: true },
-      { value: "5+ yrs", label: "Running production on AWS & Azure", verified: true },
       { value: "3", label: "Regulated sectors: banking, healthcare, aerospace", verified: true },
     ],
     focusTitle: "Platform building blocks",
@@ -234,8 +269,8 @@ export const pillars: Pillar[] = [
     seoDescription:
       "Reliability work by Nehla K J: Prometheus, Grafana, Datadog, ELK and CloudWatch monitoring, on-call incident response, root-cause analysis and disaster recovery.",
     metrics: [
+      { value: "99%", label: "Uptime, HIPAA environment (Optum)", verified: true },
       { value: "99.9%", label: "Uptime, serverless ETL (NatWest)", verified: true },
-      { value: "99%", label: "Uptime, healthcare platforms (Optum)", verified: true },
       { value: "24/7", label: "Production on-call support", verified: true },
     ],
     focusTitle: "The reliability toolkit",
@@ -252,8 +287,8 @@ export const pillars: Pillar[] = [
       },
       {
         title: "Disaster recovery",
-        body: "High availability with Auto Scaling, ALB and RDS replication. Failover procedures validated and documented.",
-        tags: ["Auto Scaling", "ALB", "RDS replication"],
+        body: "High availability with Auto Scaling, ALB and RDS/Aurora replication across Availability Zones. Failover procedures validated and documented.",
+        tags: ["Auto Scaling", "ALB", "Aurora replication"],
       },
       {
         title: "Working with dev teams",
@@ -276,9 +311,13 @@ export const pillars: Pillar[] = [
     intro:
       "DevSecOps for teams that answer to regulators: quality gates in the pipeline, least-privilege access, tokens instead of passwords.",
     seoDescription:
-      "Security and compliance work by Nehla K J: DevSecOps in a HIPAA-regulated environment with zero critical findings, OAuth2 and token auth, IAM and RBAC.",
+      "Security and compliance work by Nehla K J: DevSecOps in a HIPAA-regulated environment with zero open critical findings, OAuth2 and token auth, IAM and RBAC.",
     metrics: [
-      { value: "0", label: "Critical security findings (HIPAA)", verified: true },
+      {
+        value: "0",
+        label: "Open critical findings: weekly AWS Inspector scans with email alerts, critical issues fixed immediately (Optum, HIPAA)",
+        verified: true,
+      },
       { value: "OAuth2", label: "Token auth replaced passwords (Airbus)", verified: true },
       { value: "RBAC", label: "Jenkins access control by role", verified: true },
     ],
@@ -296,7 +335,7 @@ export const pillars: Pillar[] = [
       },
       {
         title: "Secrets & scanning",
-        body: "Secrets Manager, token-based credentials, SonarQube quality gates and AWS Inspector scanning.",
+        body: "Secrets Manager, token-based credentials, SonarQube quality gates, and weekly AWS Inspector scans with email alerts.",
         tags: ["Secrets Manager", "SonarQube", "AWS Inspector"],
       },
     ],
@@ -307,13 +346,17 @@ export const pillars: Pillar[] = [
     title: "Cost Optimisation & Projects",
     short: "FinOps",
     headline: "Every line on the cloud bill earns its place.",
-    intro: "Right-size, reserve, clean up with policy, and track it — across AWS and Azure.",
+    intro: "Right-size, reserve, clean up with policy, and track it across AWS and Azure.",
     seoDescription:
       "Cost optimisation by Nehla K J: 20% lower AWS and Azure costs through rightsizing, reserved instances, lifecycle rules and Cloud Custodian policies.",
     metrics: [
       { value: "-20%", label: "AWS & Azure costs (Optum)", verified: true },
       { value: "2", label: "Clouds optimised: AWS and Azure", verified: true },
-      { value: "-25%", label: "Manual effort, via VM scheduling", verified: true },
+      {
+        value: "-25%",
+        label: "Manual effort: automated VM scheduling, IAM key rotation and AMI distribution (AWS Image Builder)",
+        verified: true,
+      },
     ],
     focusTitle: "Cost strategy",
     focus: [
@@ -324,8 +367,8 @@ export const pillars: Pillar[] = [
       },
       {
         title: "Right-size & schedule",
-        body: "Rightsizing, VM scheduling and on-demand EMR for serverless workloads instead of always-on capacity.",
-        tags: ["Rightsizing", "VM scheduling", "EMR"],
+        body: "Rightsizing, VM scheduling, and on-demand EMR and EMR Serverless instead of always-on clusters.",
+        tags: ["Rightsizing", "VM scheduling", "EMR Serverless"],
       },
       {
         title: "Commit & clean up",
@@ -345,7 +388,7 @@ export type CaseStudy = Verifiable & {
   pillar: PillarSlug;
   title: string;
   summary: string;
-  sector: "Banking" | "Financial services" | "Healthcare" | "Aerospace";
+  sector: "Banking" | "Financial services" | "Healthcare" | "Aerospace" | "Enterprise";
   client: string;
   role: string;
   duration: string;
@@ -356,7 +399,7 @@ export type CaseStudy = Verifiable & {
 };
 
 export const caseStudies: CaseStudy[] = [
-  // 01 — CI/CD
+  // 01: CI/CD
   {
     slug: "airbus-software-delivery",
     pillar: "cicd-automation",
@@ -414,8 +457,8 @@ export const caseStudies: CaseStudy[] = [
     slug: "pensions-platform-pipelines",
     pillar: "cicd-automation",
     verified: true,
-    title: "80% of manual deployment work removed",
-    summary: "Jenkins pipelines, Docker and Helm for a high-availability Java pensions and long-term savings website.",
+    title: "Pensions platform delivery",
+    summary: "Jenkins pipelines with SonarQube quality gates, Docker and Helm for a high-availability Java pensions website.",
     sector: "Financial services",
     client: "Pensions & savings platform · via TCS",
     role: "System Engineer",
@@ -440,6 +483,7 @@ export const caseStudies: CaseStudy[] = [
           "Helm charts and pipelines that reduced developers' dependency on ops",
           "Supported blue-green deployments in production to cut downtime and release risk",
           "Locust load testing before releases",
+          "Monitoring with CloudWatch and ELK",
         ],
       },
     ],
@@ -457,10 +501,54 @@ export const caseStudies: CaseStudy[] = [
       { value: "80%", label: "Manual deployment effort removed" },
       { value: "Blue-green", label: "Production releases with less downtime" },
     ],
-    stack: ["Jenkins", "Ansible", "Nexus", "SonarQube", "Docker", "Helm", "Locust"],
+    stack: ["Jenkins", "SonarQube", "Docker", "Helm", "Kubernetes", "EKS", "ELK", "Ansible", "Nexus", "Locust"],
+  },
+  {
+    slug: "optum-github-actions-migration",
+    pillar: "cicd-automation",
+    verified: true,
+    title: "Jenkins to GitHub Actions migration",
+    summary: "Moved CI/CD off Jenkins onto GitHub Actions, with DevSecOps controls and quality gates for HIPAA workloads.",
+    sector: "Healthcare",
+    client: "Optum Global Solutions",
+    role: "Cloud Infrastructure Engineer",
+    duration: "07/2022 – 07/2024",
+    blocks: [
+      {
+        heading: "Context",
+        body: "Healthcare CI/CD running on Jenkins, in a HIPAA-regulated environment where every change had to pass security checks.",
+      },
+      { heading: "What I owned", bullets: ["Migrating the CI/CD pipelines from Jenkins to GitHub Actions"] },
+      {
+        heading: "Approach",
+        body: "Move delivery next to the code in GitHub, and build the security checks into the pipeline instead of bolting them on after.",
+      },
+      {
+        heading: "Execution",
+        bullets: [
+          "Migrated CI/CD pipelines from Jenkins to GitHub Actions",
+          "Added DevSecOps controls and quality gates to the pipeline",
+        ],
+      },
+      { heading: "Results", body: "Lower CI costs and better collaboration through GitHub's review and collaboration tools." },
+    ],
+    diagram: {
+      title: "Migrated pipeline",
+      steps: [
+        { label: "Code", detail: "GitHub" },
+        { label: "Build", detail: "GitHub Actions" },
+        { label: "Quality gate", detail: "DevSecOps checks" },
+        { label: "Deploy", detail: "AWS / Azure" },
+      ],
+    },
+    results: [
+      { value: "Jenkins → GHA", label: "CI/CD moved to GitHub Actions" },
+      { value: "HIPAA", label: "Security checks built into the pipeline" },
+    ],
+    stack: ["GitHub Actions", "Jenkins", "DevSecOps", "Quality gates"],
   },
 
-  // 02 — IaC
+  // 02: IaC
   {
     slug: "optum-reusable-modules",
     pillar: "infrastructure-as-code",
@@ -486,8 +574,7 @@ export const caseStudies: CaseStudy[] = [
         heading: "Execution",
         bullets: [
           "Rolled reusable modules out across 50+ repositories",
-          "Ran proofs of concept (ADF with Databricks, customised EMR Serverless images) and wrote the Terraform",
-          "Presented PoC results and recommendations to product teams",
+          "Shared modules for the common building blocks, versioned and reused instead of rewritten",
         ],
       },
     ],
@@ -543,51 +630,65 @@ export const caseStudies: CaseStudy[] = [
     stack: ["Terraform", "AWS Image Builder", "IAM", "EC2"],
   },
 
-  // 03 — Platforms
+  // 03: Platforms
   {
-    slug: "natwest-serverless-platform",
+    slug: "natwest-contact-centre",
     pillar: "cloud-platforms",
     verified: true,
-    title: "Serverless pipelines for a bank, at 99.9% uptime",
-    summary: "Terraform landing zones, event-driven ETL and an Amazon Connect contact centre for NatWest.",
+    title: "NatWest contact centre on Amazon Connect",
+    summary: "Serverless AWS contact centre for a UK bank: Connect flows, Lex bots, and event-driven pipelines at 99.9% uptime.",
     sector: "Banking",
     client: "NatWest · via Infosys",
     role: "Associate Consultant, Cloud Infrastructure",
-    duration: "Infosys, 2024 – 2026",
+    duration: "08/2024 – 07/2026",
     blocks: [
       {
-        heading: "Platform architecture",
-        body: "Multi-account AWS landing zones, VPC networking and ECS/ECR container workloads, built in Terraform.",
+        heading: "Context",
+        body: "AWS contact centre handling a UK bank's customer calls and chat, plus the data pipelines that report on it.",
       },
       {
-        heading: "Serverless & event-driven",
+        heading: "What I owned",
         bullets: [
-          "ETL pipelines orchestrated with Lambda, Step Functions, EventBridge and DynamoDB",
-          "Amazon Connect contact flows with Amazon Lex chatbots and voice, integrated with Lambda, S3 and DynamoDB",
-          "Amazon Bedrock GenAI proof of concept with Lambda",
+          "Enhancing and deploying the contact centre platform with serverless AWS services and Terraform",
+          "Contact flows, Lex bots and the Lambda logic behind them",
+          "Pipelines processing operational metrics: call volumes, routing outcomes and SLA data",
         ],
       },
       {
-        heading: "Kubernetes & containers",
-        body: "Supported Kubernetes workloads on AWS EKS across development, testing and production.",
+        heading: "Approach",
+        body: "Keep it serverless and in Terraform, and automate scheduling so pipelines run without someone watching them.",
       },
       {
-        heading: "Operations",
-        body: "CloudWatch dashboards and alarms, Python/boto3 automation, on-call rotations and L2/L3 incidents with root-cause analysis.",
+        heading: "Execution",
+        bullets: [
+          "Built and enhanced Amazon Connect contact flows integrated with Lambda, S3, Lex and DynamoDB",
+          "Built Amazon Lex chatbots and voice interfaces; migrated Lex V1 to V2",
+          "Fixed a client-raised routing bug where 14% of calls went to the wrong queue",
+          "Automated scheduling and orchestration with EventBridge, Step Functions and Lambda",
+          "Connect security: S3 call recording encryption and IAM controls",
+          "Monitored with CloudWatch and flow logs; on-call and L2/L3 incident resolution",
+        ],
+      },
+      {
+        heading: "Results",
+        body: "Calls routed to the right queue again, more reliable pipelines with less manual intervention, and 99.9% pipeline uptime.",
       },
     ],
     diagram: {
-      title: "Event-driven ETL",
+      title: "Contact centre and reporting",
       steps: [
-        { label: "EventBridge", detail: "Triggers" },
-        { label: "Step Functions", detail: "Orchestration" },
-        { label: "Lambda", detail: "Transform" },
-        { label: "DynamoDB", detail: "Store" },
+        { label: "Amazon Connect", detail: "Calls & chat" },
+        { label: "Lex", detail: "Bots & voice" },
+        { label: "Lambda", detail: "Routing logic" },
+        { label: "Step Functions", detail: "Metrics pipeline" },
         { label: "CloudWatch", detail: "Alarms" },
       ],
     },
-    results: [{ value: "99.9%", label: "ETL pipeline uptime" }],
-    stack: ["Terraform", "Lambda", "Step Functions", "EventBridge", "DynamoDB", "Amazon Connect", "Lex", "Bedrock"],
+    results: [
+      { value: "14%", label: "Call misrouting fixed" },
+      { value: "99.9%", label: "Pipeline uptime" },
+    ],
+    stack: ["Amazon Connect", "Lex", "Lambda", "DynamoDB", "S3", "EventBridge", "Step Functions", "Terraform", "CloudWatch"],
   },
   {
     slug: "hybrid-kubernetes-platform",
@@ -630,65 +731,160 @@ export const caseStudies: CaseStudy[] = [
     results: [{ value: "2", label: "Runtimes, one deployment path" }],
     stack: ["Kubernetes", "AWS EKS", "Terraform", "Docker", "Helm", "CloudWatch", "ELK"],
   },
-
-  // 04 — Reliability
   {
-    slug: "airbus-production-reliability",
+    slug: "ai-genai-pocs",
+    pillar: "cloud-platforms",
+    verified: true,
+    title: "AI and GenAI proofs of concept",
+    summary: "PoCs across conversational AI, Amazon Bedrock, LLM integration and AI agents, from support triage to log analysis.",
+    sector: "Enterprise",
+    client: "Infosys",
+    role: "Associate → Senior Associate Consultant",
+    duration: "08/2024 – 07/2026",
+    blocks: [
+      {
+        heading: "Context",
+        body: "Testing where AI could take real work off support and operations teams, before anything went near production.",
+      },
+      {
+        heading: "What I built",
+        bullets: [
+          "Amazon Connect and Lex conversational AI",
+          "Amazon Bedrock GenAI with Lambda",
+          "LLM integration and AI agents",
+          "Support triage and AI-assisted log analysis",
+        ],
+      },
+      { heading: "Approach", body: "Each PoC also covered security, so the result was a usable pattern, not just a demo." },
+    ],
+    diagram: {
+      title: "GenAI PoC flow",
+      steps: [
+        { label: "Request", detail: "Connect / Lex" },
+        { label: "Lambda", detail: "Orchestration" },
+        { label: "Bedrock", detail: "LLM" },
+        { label: "Answer", detail: "Triage / insight" },
+      ],
+    },
+    results: [{ value: "GenAI", label: "PoCs on Bedrock, Lex and Connect" }],
+    stack: ["Amazon Bedrock", "Amazon Lex", "Amazon Connect", "Lambda", "Python"],
+  },
+  {
+    slug: "optum-cloud-pocs",
+    pillar: "cloud-platforms",
+    verified: true,
+    title: "Azure and AWS proofs of concept",
+    summary: "ADF with Databricks and customised EMR Serverless images, taken from PoC to Terraform and presented to the product team.",
+    sector: "Healthcare",
+    client: "Optum Global Solutions",
+    role: "Cloud Infrastructure Engineer",
+    duration: "07/2022 – 07/2024",
+    blocks: [
+      { heading: "Context", body: "Product teams needed to know which new AWS and Azure features were worth adopting." },
+      {
+        heading: "Execution",
+        bullets: [
+          "Ran PoCs for ADF with Databricks integration and customised EMR Serverless images",
+          "Wrote the Terraform for the PoCs that worked",
+          "Presented results to the product team in internal office hours",
+        ],
+      },
+    ],
+    diagram: {
+      title: "PoC to production",
+      steps: [
+        { label: "PoC", detail: "AWS / Azure feature" },
+        { label: "Validate", detail: "Does it work?" },
+        { label: "Terraform", detail: "Codify it" },
+        { label: "Present", detail: "Office hours" },
+      ],
+    },
+    results: [{ value: "AWS + Azure", label: "PoCs taken to Terraform" }],
+    stack: ["Azure Data Factory", "Databricks", "EMR Serverless", "Terraform"],
+  },
+
+  // 04: Reliability
+  {
+    slug: "airbus-incident-response",
     pillar: "reliability",
     verified: true,
-    title: "Keeping Airbus DevOps platforms up across 3 environments",
-    summary: "Incident response, RCA, upgrades with minimal downtime and validated failover for enterprise platforms.",
+    title: "Production incident response at Airbus",
+    summary: "Root-cause analysis for production failures, Jira upgrades with minimal downtime, and runbooks the team owns.",
     sector: "Aerospace",
     client: "Airbus · via Infosys",
     role: "Associate → Senior Associate Consultant",
     duration: "08/2024 – 07/2026",
     blocks: [
       {
-        heading: "Monitoring stack",
-        body: "Grafana, Prometheus and Datadog for AWS EKS workloads, supporting SLI/SLO monitoring and SLA compliance.",
+        heading: "Context",
+        body: "Enterprise DevOps platforms (Jenkins, JFrog Artifactory, Jira) running across INT, VAL and PROD.",
       },
       {
-        heading: "Alerting & incident handling",
+        heading: "Execution",
         bullets: [
-          "Led incident response and root-cause analysis for high-volume pipeline job failures and script errors",
-          "Resolved pipeline, authentication and IAM/RBAC issues in production",
+          "Root-cause analysis for high-volume Jenkins job failures and script errors in production",
+          "Jira upgrades in INT and VAL with minimal downtime",
+          "Runbooks and KT documentation in Confluence, so the team could own the fixes",
         ],
       },
-      {
-        heading: "Disaster recovery approach",
-        body: "High availability and DR with Terraform, Auto Scaling, ALB, RDS replication and CloudWatch. Failover procedures validated and recovery runbooks written.",
-      },
-      {
-        heading: "Collaboration with development teams",
-        body: "Worked directly with Airbus stakeholders. Wrote runbooks, installation guides and knowledge transfer packs in Confluence.",
-      },
-      {
-        heading: "Production troubleshooting",
-        body: "Jira upgrades in INT and VAL with minimal downtime; production fixes for job failures, scripts and UI issues.",
-      },
+      { heading: "Results", body: "Recurring failures fixed at the root, and fixes the team can repeat without me." },
     ],
     diagram: {
-      title: "Recovery path",
+      title: "Incident flow",
       steps: [
-        { label: "Detect", detail: "CloudWatch / Datadog" },
-        { label: "Scale", detail: "Auto Scaling" },
-        { label: "Route", detail: "ALB" },
-        { label: "Fail over", detail: "RDS replica" },
+        { label: "Detect", detail: "Job failures" },
+        { label: "Investigate", detail: "Logs & scripts" },
+        { label: "Root cause", detail: "RCA" },
+        { label: "Fix", detail: "Production" },
         { label: "Runbook", detail: "Confluence" },
       ],
     },
     results: [
       { value: "3", label: "Environments: INT, VAL, PROD" },
-      { value: "Tested", label: "Failover procedures, documented" },
+      { value: "RCA", label: "Fixes at the root, documented" },
     ],
-    stack: ["AWS EKS", "Prometheus", "Grafana", "Datadog", "Terraform", "RDS", "CloudWatch"],
+    stack: ["Jenkins", "Jira", "RCA", "Confluence"],
+  },
+  {
+    slug: "aws-disaster-recovery",
+    pillar: "reliability",
+    verified: true,
+    title: "Disaster recovery and high availability on AWS",
+    summary: "HA and DR with Terraform, Auto Scaling, ALB and Aurora replication, with failover tested and written down.",
+    sector: "Enterprise",
+    client: "Infosys",
+    role: "Associate → Senior Associate Consultant",
+    duration: "08/2024 – 07/2026",
+    blocks: [
+      {
+        heading: "Execution",
+        bullets: [
+          "Designed HA and DR with Terraform, Auto Scaling, ALB and RDS/Aurora replication across additional Availability Zones",
+          "Ran an Aurora replication proof of concept for DR",
+          "Validated failover procedures and wrote recovery runbooks",
+          "Monitoring with CloudWatch",
+        ],
+      },
+    ],
+    diagram: {
+      title: "Recovery path",
+      steps: [
+        { label: "Detect", detail: "CloudWatch" },
+        { label: "Scale", detail: "Auto Scaling" },
+        { label: "Route", detail: "ALB / Route 53" },
+        { label: "Fail over", detail: "Aurora replica" },
+        { label: "Runbook", detail: "Documented" },
+      ],
+    },
+    results: [{ value: "Tested", label: "Failover procedures, documented" }],
+    stack: ["Terraform", "Aurora", "RDS", "Auto Scaling", "ALB", "Route 53", "CloudWatch"],
   },
   {
     slug: "optum-uptime-monitoring",
     pillar: "reliability",
     verified: true,
     title: "Healthcare platforms held at 99% uptime",
-    summary: "CloudWatch monitoring, IAM policies and AWS Inspector — with no critical issues.",
+    summary: "CloudWatch monitoring, IAM policies and weekly AWS Inspector scans, with no open critical issues.",
     sector: "Healthcare",
     client: "Optum Global Solutions",
     role: "Cloud Infrastructure Engineer",
@@ -716,24 +912,24 @@ export const caseStudies: CaseStudy[] = [
     },
     results: [
       { value: "99%", label: "Uptime" },
-      { value: "0", label: "Critical issues" },
+      { value: "0", label: "Open critical issues" },
     ],
     stack: ["CloudWatch", "AWS Inspector", "IAM", "ServiceNow"],
   },
 
-  // 05 — Security
+  // 05: Security
   {
     slug: "hipaa-devsecops-migration",
     pillar: "security-compliance",
     verified: true,
-    title: "Jenkins to GitHub Actions, with zero critical findings",
-    summary: "Migrated CI/CD to GitHub Actions and Azure DevOps with DevSecOps controls in a HIPAA-regulated environment.",
+    title: "Zero open critical findings in a HIPAA environment",
+    summary: "Weekly AWS Inspector scans with email alerts, DevSecOps quality gates and least-privilege IAM for healthcare workloads.",
     sector: "Healthcare",
     client: "Optum Global Solutions",
     role: "Cloud Infrastructure Engineer",
     duration: "07/2022 – 07/2024",
     blocks: [
-      { heading: "Compliance context", body: "Healthcare workloads under HIPAA. Security issues had to be caught before production, not after." },
+      { heading: "Compliance context", body: "Healthcare workloads under HIPAA. Security issues had to be caught early and closed fast." },
       {
         heading: "Access control",
         bullets: ["IAM policies scoped per workload", "Automated IAM key rotation"],
@@ -741,40 +937,43 @@ export const caseStudies: CaseStudy[] = [
       {
         heading: "Execution",
         bullets: [
-          "Migrated Jenkins pipelines to GitHub Actions and Azure DevOps",
-          "Added DevSecOps controls, quality gates and vulnerability remediation to the pipeline",
-          "AWS Inspector scanning on cloud resources",
+          "Weekly AWS Inspector scans with email alerts",
+          "Critical findings fixed immediately, so none stayed open",
+          "DevSecOps controls, quality gates and vulnerability remediation in the CI/CD pipeline",
         ],
       },
     ],
     diagram: {
-      title: "DevSecOps pipeline",
+      title: "Find and fix loop",
       steps: [
-        { label: "Code", detail: "GitHub" },
-        { label: "Build", detail: "GitHub Actions" },
-        { label: "Quality gate", detail: "Scans" },
-        { label: "Deploy", detail: "Azure DevOps" },
-        { label: "Runtime", detail: "AWS Inspector" },
+        { label: "Scan", detail: "Weekly Inspector" },
+        { label: "Alert", detail: "Email" },
+        { label: "Triage", detail: "Critical first" },
+        { label: "Fix", detail: "Immediately" },
+        { label: "Gate", detail: "CI/CD checks" },
       ],
     },
     results: [
-      { value: "0", label: "Critical security findings" },
-      { value: "HIPAA", label: "Regulated environment" },
+      { value: "0", label: "Open critical findings" },
+      { value: "Weekly", label: "AWS Inspector scans with email alerts" },
     ],
-    stack: ["GitHub Actions", "Azure DevOps", "IAM", "AWS Inspector"],
+    stack: ["AWS Inspector", "IAM", "GitHub Actions", "DevSecOps"],
   },
   {
     slug: "airbus-token-auth",
     pillar: "security-compliance",
     verified: true,
-    title: "Passwords out, tokens in: securing Airbus DevOps tools",
+    title: "Airbus authentication hardening",
     summary: "OAuth2 and token-based authentication across Jenkins, Artifactory and Jira, plus Jenkins RBAC.",
     sector: "Aerospace",
     client: "Airbus · via Infosys",
     role: "Associate → Senior Associate Consultant",
     duration: "08/2024 – 07/2026",
     blocks: [
-      { heading: "Compliance context", body: "Enterprise security standards required moving off password-based authentication." },
+      {
+        heading: "Context",
+        body: "Enterprise DevOps platforms (Jenkins, JFrog Artifactory, Jira) across INT, VAL and PROD, where security standards required moving off password-based authentication.",
+      },
       {
         heading: "Access control",
         bullets: ["Implemented OAuth2 and token-based access", "Configured Jenkins RBAC to control job visibility and user access"],
@@ -787,6 +986,7 @@ export const caseStudies: CaseStudy[] = [
         heading: "Execution",
         body: "Fixed Jira SIL OAuth2 SSO by adding the missing Bearer token to the authorization header.",
       },
+      { heading: "Results", body: "Stronger access control with no disruption to delivery pipelines." },
     ],
     diagram: {
       title: "Auth migration",
@@ -801,10 +1001,10 @@ export const caseStudies: CaseStudy[] = [
       { value: "OAuth2", label: "Token-based auth live" },
       { value: "RBAC", label: "Jenkins jobs scoped by role" },
     ],
-    stack: ["Jenkins", "JFrog Artifactory", "Jira", "OAuth2"],
+    stack: ["Jenkins", "JFrog Artifactory", "Jira", "OAuth2", "RBAC"],
   },
 
-  // 06 — Cost
+  // 06: Cost
   {
     slug: "optum-cloud-cost-reduction",
     pillar: "cost-optimisation",
@@ -826,7 +1026,7 @@ export const caseStudies: CaseStudy[] = [
           "Rightsizing and reserved instances",
           "Storage lifecycle rules",
           "Cloud Custodian policies",
-          "On-demand EMR for serverless workloads",
+          "On-demand EMR and EMR Serverless instead of always-on clusters",
           "Tracked in AWS Cost Explorer and Azure Cost Management",
         ],
       },
@@ -854,10 +1054,23 @@ export type Project = Verifiable & {
   pipeline: string;
   stack: string[];
   repo: string;
+  status?: string;
 };
 
-/** Personal GitHub projects. Empty until real repos are shared. */
-export const projects: Project[] = [];
+/** Personal GitHub projects. */
+export const projects: Project[] = [
+  {
+    name: "aws-devops-platform",
+    description:
+      "Containerised app deployed on AWS ECS Fargate with Terraform, GitHub Actions CI/CD and CloudWatch monitoring. Built step by step as a public work sample.",
+    architecture: "Docker container on ECS Fargate, provisioned with Terraform",
+    pipeline: "GitHub Actions CI/CD, CloudWatch monitoring",
+    stack: ["Docker", "Terraform", "ECS Fargate", "GitHub Actions", "CloudWatch"],
+    repo: "https://github.com/Nehla456",
+    status: "In progress",
+    verified: true,
+  },
+];
 
 /** True while any sample content is still on the site. */
 export function hasPlaceholders() {

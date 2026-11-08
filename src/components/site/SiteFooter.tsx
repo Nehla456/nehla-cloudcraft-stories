@@ -31,6 +31,18 @@ export function LetsTalk() {
                 {!contactVerified.email && <PlaceholderTag tone="ink" />}
               </a>
             </Button>
+            <Button asChild variant="ghostInk" size="xl">
+              <a href={profile.linkedin} target="_blank" rel="noreferrer">
+                <Linkedin /> LinkedIn
+              </a>
+            </Button>
+            {profile.github && (
+              <Button asChild variant="ghostInk" size="xl">
+                <a href={profile.github} target="_blank" rel="noreferrer">
+                  <Github /> GitHub
+                </a>
+              </Button>
+            )}
             <CvActions />
           </div>
         </Reveal>
@@ -47,7 +59,7 @@ export function SiteFooter() {
           <p className="font-display text-2xl font-semibold">{profile.name}</p>
           <p className="mt-2 max-w-sm text-sm text-ink-muted">{profile.positioning}</p>
           <p className="mt-2 text-sm text-ink-muted">
-            {profile.location} · {profile.workAuth}
+            {profile.location} · {profile.workAuth} · {profile.languages}
           </p>
         </div>
         <nav aria-label="Footer" className="grid grid-cols-2 gap-x-6 gap-y-2 text-sm">

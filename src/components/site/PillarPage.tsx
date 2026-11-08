@@ -1,7 +1,7 @@
 import { Link } from "@tanstack/react-router";
 import { ArrowRight, ArrowUpRight, Github } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { caseStudiesFor, getPillar, isPlaceholder, pillars, profile, projects, type PillarSlug } from "@/data/portfolio";
+import { caseStudiesFor, getPillar, isPlaceholder, pillars, profile, projects, toolsBuilt, type PillarSlug } from "@/data/portfolio";
 import { PlaceholderTag } from "./Placeholder";
 import { CaseStudyCard } from "./CaseStudyCard";
 import { MetricStat } from "./MetricStat";
@@ -28,7 +28,7 @@ export function PillarPage({ slug }: { slug: PillarSlug }) {
         <div className="relative mx-auto max-w-7xl px-5 pb-16 pt-16 md:px-8 md:pb-24 md:pt-24">
           <Reveal>
             <p className="eyebrow text-primary-glow">
-              {pillar.number} — {pillar.title}
+              {pillar.number} · {pillar.title}
             </p>
             <h1 className="mt-5 max-w-4xl text-5xl font-bold leading-[0.95] md:text-7xl">{pillar.headline}</h1>
             <p className="mt-6 max-w-2xl text-lg text-ink-muted md:text-xl">{pillar.intro}</p>
@@ -85,6 +85,35 @@ export function PillarPage({ slug }: { slug: PillarSlug }) {
         </div>
       </section>
 
+      {/* Tools I built (CI/CD page only) */}
+      {slug === "cicd-automation" && (
+        <section className="mx-auto max-w-7xl px-5 py-20 md:px-8 md:py-28">
+          <Reveal>
+            <p className="eyebrow text-primary">Tools I built</p>
+            <h2 className="mt-3 text-4xl font-bold md:text-5xl">Code, not just config.</h2>
+            <p className="mt-4 max-w-xl text-muted-foreground">Internal tools built and shipped for Airbus.</p>
+          </Reveal>
+          <div className="mt-12 grid gap-px overflow-hidden rounded-3xl border border-border bg-border md:grid-cols-3">
+            {toolsBuilt.map((t, i) => (
+              <Reveal key={t.title} delay={i * 80} className="bg-card p-7 md:p-9">
+                <span className="font-mono text-xs text-primary">{String(i + 1).padStart(2, "0")}</span>
+                <h3 className="mt-3 text-2xl font-bold">{t.title}</h3>
+                <p className="mt-3 text-muted-foreground">{t.body}</p>
+                {t.tags && (
+                  <div className="mt-5 flex flex-wrap gap-1.5">
+                    {t.tags.map((tag) => (
+                      <span key={tag} className="rounded-md bg-secondary px-2 py-0.5 font-mono text-[0.7rem] text-secondary-foreground">
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+                )}
+              </Reveal>
+            ))}
+          </div>
+        </section>
+      )}
+
       {/* Projects (cost page only) */}
       {slug === "cost-optimisation" && (
         <section className="mx-auto max-w-7xl px-5 py-20 md:px-8 md:py-28">
@@ -99,7 +128,7 @@ export function PillarPage({ slug }: { slug: PillarSlug }) {
             <Reveal className="mt-12 rounded-3xl border-2 border-dashed border-border p-8 md:p-10">
               <p className="font-display text-2xl font-bold">New repos on the way.</p>
               <p className="mt-3 max-w-xl text-muted-foreground">
-                I'm publishing small infrastructure projects — Terraform modules, pipelines, monitoring setups. They'll
+                I'm publishing small infrastructure projects: Terraform modules, pipelines, monitoring setups. They'll
                 appear here with their architecture, pipeline and stack.
               </p>
               {profile.github && (
@@ -116,7 +145,14 @@ export function PillarPage({ slug }: { slug: PillarSlug }) {
               <Reveal key={p.name} delay={i * 100} as="article" className="flex flex-col rounded-3xl border border-border bg-card p-7 shadow-card">
                 <div className="flex items-center justify-between gap-3">
                   <span className="font-mono text-lg font-semibold">{p.name}</span>
-                  {isPlaceholder(p) ? <PlaceholderTag /> : <Github className="size-5 text-muted-foreground" />}
+                  <span className="flex items-center gap-2">
+                    {p.status && (
+                      <span className="rounded-full bg-accent px-2.5 py-0.5 font-mono text-[0.7rem] text-accent-foreground">
+                        {p.status}
+                      </span>
+                    )}
+                    {isPlaceholder(p) ? <PlaceholderTag /> : <Github className="size-5 text-muted-foreground" />}
+                  </span>
                 </div>
                 <p className="mt-3 text-muted-foreground">{p.description}</p>
                 <dl className="mt-6 space-y-3 text-sm">
@@ -141,7 +177,7 @@ export function PillarPage({ slug }: { slug: PillarSlug }) {
                 ) : (
                   <Button asChild variant="outlineBold" className="mt-auto self-start rounded-full" style={{ marginTop: "1.75rem" }}>
                     <a href={p.repo} target="_blank" rel="noreferrer">
-                      View repo <ArrowUpRight />
+                      View on GitHub <ArrowUpRight />
                     </a>
                   </Button>
                 )}
@@ -158,7 +194,7 @@ export function PillarPage({ slug }: { slug: PillarSlug }) {
           className="group mx-auto flex max-w-7xl items-center justify-between gap-6 px-5 py-14 md:px-8 md:py-20"
         >
           <div>
-            <p className="eyebrow text-muted-foreground">Next — {next.number}</p>
+            <p className="eyebrow text-muted-foreground">Next: {next.number}</p>
             <p className="mt-2 font-display text-4xl font-bold tracking-tight transition-colors group-hover:text-primary md:text-6xl">
               {next.title}
             </p>

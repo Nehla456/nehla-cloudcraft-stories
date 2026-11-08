@@ -79,13 +79,13 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Nehla K J — Cloud DevOps Engineer" },
+      { title: "Nehla K J | Cloud DevOps Engineer" },
       {
         name: "description",
         content: "Cloud DevOps Engineer, AWS & Terraform, for banking, healthcare and aerospace.",
       },
       { name: "author", content: "Nehla K J" },
-      { property: "og:title", content: "Nehla K J — Cloud DevOps Engineer" },
+      { property: "og:title", content: "Nehla K J | Cloud DevOps Engineer" },
       {
         property: "og:description",
         content: "Cloud DevOps Engineer, AWS & Terraform, for banking, healthcare and aerospace.",

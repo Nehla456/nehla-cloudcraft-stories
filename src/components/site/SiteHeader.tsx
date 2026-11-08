@@ -25,7 +25,7 @@ export function SiteHeader() {
       )}
     >
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between gap-6 px-5 text-ink-foreground md:px-8">
-        <Link to="/" className="group flex items-center gap-2.5" aria-label="Nehla K J — home">
+        <Link to="/" className="group flex items-center gap-2.5" aria-label="Nehla K J, home">
           <span className="grid size-8 place-items-center rounded-lg bg-gradient-primary font-display text-sm font-bold text-primary-foreground transition-transform group-hover:rotate-6">
             NK
           </span>

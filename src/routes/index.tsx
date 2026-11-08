@@ -7,6 +7,8 @@ import { PageShell } from "@/components/site/PageShell";
 import { Reveal } from "@/components/site/Reveal";
 import { TerminalCard } from "@/components/site/TerminalCard";
 import {
+  certifications,
+  clientWork,
   getCaseStudy,
   headlineMetrics,
   isPlaceholder,
@@ -22,14 +24,20 @@ import { seo } from "@/lib/seo";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: seo(
-      "Nehla K J — Cloud DevOps Engineer, AWS & Terraform",
+      "Nehla K J | Cloud DevOps Engineer, AWS & Terraform",
       "Paris-based Cloud DevOps Engineer with 5+ years on AWS and Azure for Airbus, NatWest and Optum. Deployments from 2 hours to 15 minutes, cloud costs down 20%.",
     ),
   }),
   component: Index,
 });
 
-const featured = ["airbus-software-delivery", "optum-reusable-modules", "optum-cloud-cost-reduction"]
+const featured = [
+  "airbus-software-delivery",
+  "natwest-contact-centre",
+  "airbus-token-auth",
+  "optum-reusable-modules",
+  "optum-cloud-cost-reduction",
+]
   .map(getCaseStudy)
   .filter((c): c is CaseStudy => Boolean(c));
 
@@ -49,7 +57,7 @@ function Index() {
           <Reveal>
             <p className="inline-flex items-center gap-2 rounded-full border border-ink-border bg-ink-soft px-3 py-1.5 font-mono text-xs text-ink-muted">
               <span className="size-2 animate-pulse rounded-full bg-signal" />
-              {profile.location} · {profile.workAuth}
+              {profile.location} · {profile.workAuth} · {profile.languages}
             </p>
             <h1 className="mt-7 text-[3.2rem] font-bold leading-[0.92] sm:text-7xl lg:text-[5.6rem]">
               I build cloud platforms that <span className="text-gradient">ship fast</span> and stay up.
@@ -178,6 +186,21 @@ function Index() {
         </div>
       </section>
 
+      {/* Working with clients */}
+      <section className="mx-auto max-w-7xl px-5 py-20 md:px-8 md:py-24">
+        <Reveal>
+          <p className="eyebrow text-primary">How I work with clients</p>
+        </Reveal>
+        <div className="mt-10 grid gap-4 md:grid-cols-3">
+          {clientWork.map((c, i) => (
+            <Reveal key={c.title} delay={i * 100} className="rounded-3xl bg-secondary p-7">
+              <h3 className="text-2xl font-bold">{c.title}</h3>
+              <p className="mt-3 text-muted-foreground">{c.body}</p>
+            </Reveal>
+          ))}
+        </div>
+      </section>
+
       {/* Stack marquee */}
       <section className="overflow-hidden py-10" aria-label="Tools I use">
         <div className="animate-marquee flex w-max gap-10">
@@ -191,6 +214,18 @@ function Index() {
             </span>
           ))}
         </div>
+      </section>
+
+      {/* Certifications */}
+      <section className="mx-auto max-w-7xl px-5 pb-16 md:px-8">
+        <Reveal className="flex flex-wrap items-center gap-x-6 gap-y-2 rounded-3xl border border-border p-6 md:p-8">
+          <p className="eyebrow text-primary">Certification</p>
+          {certifications.map((c) => (
+            <p key={c.name} className="font-display text-xl font-bold md:text-2xl">
+              {c.name} <span className="text-muted-foreground">({c.year})</span>
+            </p>
+          ))}
+        </Reveal>
       </section>
     </PageShell>
   );
