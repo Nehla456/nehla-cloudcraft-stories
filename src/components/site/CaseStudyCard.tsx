@@ -1,6 +1,7 @@
 import { Link } from "@tanstack/react-router";
 import { ArrowUpRight } from "lucide-react";
-import type { CaseStudy } from "@/data/portfolio";
+import { isPlaceholder, type CaseStudy } from "@/data/portfolio";
+import { PlaceholderTag } from "./Placeholder";
 
 export function CaseStudyCard({ study }: { study: CaseStudy }) {
   const lead = study.results[0];
@@ -11,7 +12,10 @@ export function CaseStudyCard({ study }: { study: CaseStudy }) {
       className="group relative flex h-full flex-col overflow-hidden rounded-3xl border border-border bg-card p-6 shadow-card transition-all duration-300 hover:-translate-y-1 hover:border-primary hover:shadow-elegant md:p-8"
     >
       <div className="flex items-center justify-between gap-3">
-        <span className="rounded-full bg-accent px-3 py-1 font-mono text-xs text-accent-foreground">{study.sector}</span>
+        <span className="flex flex-wrap items-center gap-2">
+          <span className="rounded-full bg-accent px-3 py-1 font-mono text-xs text-accent-foreground">{study.sector}</span>
+          {isPlaceholder(study) && <PlaceholderTag />}
+        </span>
         <span className="grid size-10 place-items-center rounded-full border border-border transition-all group-hover:rotate-45 group-hover:border-primary group-hover:bg-primary group-hover:text-primary-foreground">
           <ArrowUpRight className="size-4" />
         </span>

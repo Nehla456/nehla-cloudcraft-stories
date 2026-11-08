@@ -1,7 +1,9 @@
 import { Link } from "@tanstack/react-router";
 import { ArrowUpRight, Github, Linkedin, Mail } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { pillars, profile } from "@/data/portfolio";
+import { contactVerified, pillars, profile } from "@/data/portfolio";
+import { CvActions } from "./CvActions";
+import { PlaceholderTag } from "./Placeholder";
 import { Reveal } from "./Reveal";
 
 export function LetsTalk() {
@@ -26,8 +28,10 @@ export function LetsTalk() {
             <Button asChild variant="ghostInk" size="xl">
               <a href={`mailto:${profile.email}`}>
                 <Mail /> {profile.email}
+                {!contactVerified.email && <PlaceholderTag tone="ink" />}
               </a>
             </Button>
+            <CvActions />
           </div>
         </Reveal>
       </div>

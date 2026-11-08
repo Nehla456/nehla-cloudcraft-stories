@@ -6,14 +6,24 @@ import { MetricStat } from "@/components/site/MetricStat";
 import { PageShell } from "@/components/site/PageShell";
 import { Reveal } from "@/components/site/Reveal";
 import { TerminalCard } from "@/components/site/TerminalCard";
-import { getCaseStudy, headlineMetrics, pillars, profile, sectors, stack, type CaseStudy } from "@/data/portfolio";
+import {
+  getCaseStudy,
+  headlineMetrics,
+  isPlaceholder,
+  pillars,
+  profile,
+  sectors,
+  stack,
+  type CaseStudy,
+} from "@/data/portfolio";
+import { PlaceholderTag } from "@/components/site/Placeholder";
 import { seo } from "@/lib/seo";
 
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: seo(
       "Nehla K J — Cloud DevOps Engineer, AWS & Terraform",
-      "Cloud DevOps Engineer for banking, healthcare and aerospace. Faster deployments, 99.95% uptime and 38% lower AWS costs — with the case studies to prove it.",
+      "Cloud DevOps Engineer, AWS & Terraform, for banking, healthcare and aerospace. Faster deployments, steadier platforms and leaner cloud bills.",
     ),
   }),
   component: Index,
@@ -45,8 +55,8 @@ function Index() {
               I build cloud platforms that <span className="text-gradient">ship fast</span> and stay up.
             </h1>
             <p className="mt-7 max-w-xl text-lg text-ink-muted md:text-xl">
-              Cloud DevOps Engineer for banking, healthcare and aerospace. Releases in 8 minutes, 99.95% uptime and a
-              38% smaller AWS bill — built in Terraform, with the audit trail to prove it.
+              Cloud DevOps Engineer for banking, healthcare and aerospace. I make releases faster, platforms steadier
+              and cloud bills smaller — built in Terraform, with the audit trail to prove it.
             </p>
             <div className="mt-10 flex flex-wrap gap-3">
               <Button asChild variant="hero" size="xl">
@@ -121,9 +131,10 @@ function Index() {
                   <h3 className="mt-8 text-3xl font-bold leading-tight">{p.title}</h3>
                   <p className="mt-3 text-ink-muted">{p.headline}</p>
                   {p.metrics[0] && (
-                    <div className="mt-auto flex items-baseline gap-2 pt-8">
+                    <div className="mt-auto flex flex-wrap items-baseline gap-2 pt-8">
                       <span className="font-display text-3xl font-bold text-gradient">{p.metrics[0].value}</span>
                       <span className="text-sm text-ink-muted">{p.metrics[0].label}</span>
+                      {isPlaceholder(p.metrics[0]) && <PlaceholderTag tone="ink" />}
                     </div>
                   )}
                   <span className="absolute inset-x-0 bottom-0 h-0.5 origin-left scale-x-0 bg-gradient-primary transition-transform duration-500 group-hover:scale-x-100" />
