@@ -10,33 +10,115 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as CicdAutomationRouteImport } from './routes/cicd-automation'
+import { Route as CloudPlatformsRouteImport } from './routes/cloud-platforms'
+import { Route as CostOptimisationRouteImport } from './routes/cost-optimisation'
+import { Route as InfrastructureAsCodeRouteImport } from './routes/infrastructure-as-code'
+import { Route as ReliabilityRouteImport } from './routes/reliability'
+import { Route as SecurityComplianceRouteImport } from './routes/security-compliance'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const CicdAutomationRoute = CicdAutomationRouteImport.update({
+  id: '/cicd-automation',
+  path: '/cicd-automation',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CloudPlatformsRoute = CloudPlatformsRouteImport.update({
+  id: '/cloud-platforms',
+  path: '/cloud-platforms',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CostOptimisationRoute = CostOptimisationRouteImport.update({
+  id: '/cost-optimisation',
+  path: '/cost-optimisation',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const InfrastructureAsCodeRoute = InfrastructureAsCodeRouteImport.update({
+  id: '/infrastructure-as-code',
+  path: '/infrastructure-as-code',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ReliabilityRoute = ReliabilityRouteImport.update({
+  id: '/reliability',
+  path: '/reliability',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SecurityComplianceRoute = SecurityComplianceRouteImport.update({
+  id: '/security-compliance',
+  path: '/security-compliance',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/cicd-automation': typeof CicdAutomationRoute
+  '/cloud-platforms': typeof CloudPlatformsRoute
+  '/cost-optimisation': typeof CostOptimisationRoute
+  '/infrastructure-as-code': typeof InfrastructureAsCodeRoute
+  '/reliability': typeof ReliabilityRoute
+  '/security-compliance': typeof SecurityComplianceRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/cicd-automation': typeof CicdAutomationRoute
+  '/cloud-platforms': typeof CloudPlatformsRoute
+  '/cost-optimisation': typeof CostOptimisationRoute
+  '/infrastructure-as-code': typeof InfrastructureAsCodeRoute
+  '/reliability': typeof ReliabilityRoute
+  '/security-compliance': typeof SecurityComplianceRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/cicd-automation': typeof CicdAutomationRoute
+  '/cloud-platforms': typeof CloudPlatformsRoute
+  '/cost-optimisation': typeof CostOptimisationRoute
+  '/infrastructure-as-code': typeof InfrastructureAsCodeRoute
+  '/reliability': typeof ReliabilityRoute
+  '/security-compliance': typeof SecurityComplianceRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/cicd-automation'
+    | '/cloud-platforms'
+    | '/cost-optimisation'
+    | '/infrastructure-as-code'
+    | '/reliability'
+    | '/security-compliance'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/cicd-automation'
+    | '/cloud-platforms'
+    | '/cost-optimisation'
+    | '/infrastructure-as-code'
+    | '/reliability'
+    | '/security-compliance'
+  id:
+    | '__root__'
+    | '/'
+    | '/cicd-automation'
+    | '/cloud-platforms'
+    | '/cost-optimisation'
+    | '/infrastructure-as-code'
+    | '/reliability'
+    | '/security-compliance'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  CicdAutomationRoute: typeof CicdAutomationRoute
+  CloudPlatformsRoute: typeof CloudPlatformsRoute
+  CostOptimisationRoute: typeof CostOptimisationRoute
+  InfrastructureAsCodeRoute: typeof InfrastructureAsCodeRoute
+  ReliabilityRoute: typeof ReliabilityRoute
+  SecurityComplianceRoute: typeof SecurityComplianceRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +130,59 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/cicd-automation': {
+      id: '/cicd-automation'
+      path: '/cicd-automation'
+      fullPath: '/cicd-automation'
+      preLoaderRoute: typeof CicdAutomationRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/cloud-platforms': {
+      id: '/cloud-platforms'
+      path: '/cloud-platforms'
+      fullPath: '/cloud-platforms'
+      preLoaderRoute: typeof CloudPlatformsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/cost-optimisation': {
+      id: '/cost-optimisation'
+      path: '/cost-optimisation'
+      fullPath: '/cost-optimisation'
+      preLoaderRoute: typeof CostOptimisationRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/infrastructure-as-code': {
+      id: '/infrastructure-as-code'
+      path: '/infrastructure-as-code'
+      fullPath: '/infrastructure-as-code'
+      preLoaderRoute: typeof InfrastructureAsCodeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/reliability': {
+      id: '/reliability'
+      path: '/reliability'
+      fullPath: '/reliability'
+      preLoaderRoute: typeof ReliabilityRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/security-compliance': {
+      id: '/security-compliance'
+      path: '/security-compliance'
+      fullPath: '/security-compliance'
+      preLoaderRoute: typeof SecurityComplianceRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  CicdAutomationRoute: CicdAutomationRoute,
+  CloudPlatformsRoute: CloudPlatformsRoute,
+  CostOptimisationRoute: CostOptimisationRoute,
+  InfrastructureAsCodeRoute: InfrastructureAsCodeRoute,
+  ReliabilityRoute: ReliabilityRoute,
+  SecurityComplianceRoute: SecurityComplianceRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
