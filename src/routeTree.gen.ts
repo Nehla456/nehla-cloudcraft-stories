@@ -12,10 +12,12 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as CicdAutomationRouteImport } from './routes/cicd-automation'
 import { Route as CloudPlatformsRouteImport } from './routes/cloud-platforms'
+import { Route as ContactRouteImport } from './routes/contact'
 import { Route as CostOptimisationRouteImport } from './routes/cost-optimisation'
 import { Route as InfrastructureAsCodeRouteImport } from './routes/infrastructure-as-code'
 import { Route as ReliabilityRouteImport } from './routes/reliability'
 import { Route as SecurityComplianceRouteImport } from './routes/security-compliance'
+import { Route as WorkSlugRouteImport } from './routes/work.$slug'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -30,6 +32,11 @@ const CicdAutomationRoute = CicdAutomationRouteImport.update({
 const CloudPlatformsRoute = CloudPlatformsRouteImport.update({
   id: '/cloud-platforms',
   path: '/cloud-platforms',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ContactRoute = ContactRouteImport.update({
+  id: '/contact',
+  path: '/contact',
   getParentRoute: () => rootRouteImport,
 } as any)
 const CostOptimisationRoute = CostOptimisationRouteImport.update({
@@ -52,34 +59,45 @@ const SecurityComplianceRoute = SecurityComplianceRouteImport.update({
   path: '/security-compliance',
   getParentRoute: () => rootRouteImport,
 } as any)
+const WorkSlugRoute = WorkSlugRouteImport.update({
+  id: '/work/$slug',
+  path: '/work/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/cicd-automation': typeof CicdAutomationRoute
   '/cloud-platforms': typeof CloudPlatformsRoute
+  '/contact': typeof ContactRoute
   '/cost-optimisation': typeof CostOptimisationRoute
   '/infrastructure-as-code': typeof InfrastructureAsCodeRoute
   '/reliability': typeof ReliabilityRoute
   '/security-compliance': typeof SecurityComplianceRoute
+  '/work/$slug': typeof WorkSlugRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/cicd-automation': typeof CicdAutomationRoute
   '/cloud-platforms': typeof CloudPlatformsRoute
+  '/contact': typeof ContactRoute
   '/cost-optimisation': typeof CostOptimisationRoute
   '/infrastructure-as-code': typeof InfrastructureAsCodeRoute
   '/reliability': typeof ReliabilityRoute
   '/security-compliance': typeof SecurityComplianceRoute
+  '/work/$slug': typeof WorkSlugRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/cicd-automation': typeof CicdAutomationRoute
   '/cloud-platforms': typeof CloudPlatformsRoute
+  '/contact': typeof ContactRoute
   '/cost-optimisation': typeof CostOptimisationRoute
   '/infrastructure-as-code': typeof InfrastructureAsCodeRoute
   '/reliability': typeof ReliabilityRoute
   '/security-compliance': typeof SecurityComplianceRoute
+  '/work/$slug': typeof WorkSlugRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -87,38 +105,46 @@ export interface FileRouteTypes {
     | '/'
     | '/cicd-automation'
     | '/cloud-platforms'
+    | '/contact'
     | '/cost-optimisation'
     | '/infrastructure-as-code'
     | '/reliability'
     | '/security-compliance'
+    | '/work/$slug'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/cicd-automation'
     | '/cloud-platforms'
+    | '/contact'
     | '/cost-optimisation'
     | '/infrastructure-as-code'
     | '/reliability'
     | '/security-compliance'
+    | '/work/$slug'
   id:
     | '__root__'
     | '/'
     | '/cicd-automation'
     | '/cloud-platforms'
+    | '/contact'
     | '/cost-optimisation'
     | '/infrastructure-as-code'
     | '/reliability'
     | '/security-compliance'
+    | '/work/$slug'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   CicdAutomationRoute: typeof CicdAutomationRoute
   CloudPlatformsRoute: typeof CloudPlatformsRoute
+  ContactRoute: typeof ContactRoute
   CostOptimisationRoute: typeof CostOptimisationRoute
   InfrastructureAsCodeRoute: typeof InfrastructureAsCodeRoute
   ReliabilityRoute: typeof ReliabilityRoute
   SecurityComplianceRoute: typeof SecurityComplianceRoute
+  WorkSlugRoute: typeof WorkSlugRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -142,6 +168,13 @@ declare module '@tanstack/react-router' {
       path: '/cloud-platforms'
       fullPath: '/cloud-platforms'
       preLoaderRoute: typeof CloudPlatformsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/contact': {
+      id: '/contact'
+      path: '/contact'
+      fullPath: '/contact'
+      preLoaderRoute: typeof ContactRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/cost-optimisation': {
@@ -172,6 +205,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SecurityComplianceRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/work/$slug': {
+      id: '/work/$slug'
+      path: '/work/$slug'
+      fullPath: '/work/$slug'
+      preLoaderRoute: typeof WorkSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -179,10 +219,12 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   CicdAutomationRoute: CicdAutomationRoute,
   CloudPlatformsRoute: CloudPlatformsRoute,
+  ContactRoute: ContactRoute,
   CostOptimisationRoute: CostOptimisationRoute,
   InfrastructureAsCodeRoute: InfrastructureAsCodeRoute,
   ReliabilityRoute: ReliabilityRoute,
   SecurityComplianceRoute: SecurityComplianceRoute,
+  WorkSlugRoute: WorkSlugRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
