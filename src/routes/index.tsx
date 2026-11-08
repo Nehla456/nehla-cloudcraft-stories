@@ -57,7 +57,7 @@ function Index() {
           <Reveal>
             <p className="inline-flex items-center gap-2 rounded-full border border-ink-border bg-ink-soft px-3 py-1.5 font-mono text-xs text-ink-muted">
               <span className="size-2 animate-pulse rounded-full bg-signal" />
-              {profile.location} · {profile.workAuth} · {profile.languages}
+              {profile.location} · {profile.workAuth}
             </p>
             <h1 className="mt-7 text-[3.2rem] font-bold leading-[0.92] sm:text-7xl lg:text-[5.6rem]">
               I build cloud platforms that <span className="text-gradient">ship fast</span> and stay up.
