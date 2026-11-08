@@ -27,7 +27,7 @@ export const contactVerified: Record<"email" | "linkedin" | "github", boolean> =
 
 /** CV download. Set `file` to a same-origin path (e.g. "/downloads/Nehla-KJ-CV.pdf") once the file is added. */
 export type CvConfig = { file: string | null; filename: string };
-export const cv: CvConfig = { file: "/downloads/Nehla-KJ-CV.pdf", filename: "Nehla-KJ-CV.pdf" };
+export const cv: CvConfig = { file: null, filename: "Nehla-KJ-CV.pdf" };
 
 export type CvOption =
   | { kind: "download"; href: string; filename: string }
