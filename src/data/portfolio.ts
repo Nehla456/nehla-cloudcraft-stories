@@ -315,7 +315,8 @@ export const pillars: Pillar[] = [
     metrics: [
       {
         value: "0",
-        label: "Open critical findings: weekly AWS Inspector scans with email alerts, critical issues fixed immediately (Optum, HIPAA)",
+        label: "Open critical findings (Optum, HIPAA)",
+        detail: "Weekly AWS Inspector scans with email alerts, critical issues fixed immediately.",
         verified: true,
       },
       { value: "OAuth2", label: "Token auth replaced passwords (Airbus)", verified: true },
