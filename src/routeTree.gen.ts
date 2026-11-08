@@ -10,33 +10,141 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as CicdAutomationRouteImport } from './routes/cicd-automation'
+import { Route as CloudPlatformsRouteImport } from './routes/cloud-platforms'
+import { Route as ContactRouteImport } from './routes/contact'
+import { Route as CostOptimisationRouteImport } from './routes/cost-optimisation'
+import { Route as InfrastructureAsCodeRouteImport } from './routes/infrastructure-as-code'
+import { Route as ReliabilityRouteImport } from './routes/reliability'
+import { Route as SecurityComplianceRouteImport } from './routes/security-compliance'
+import { Route as WorkSlugRouteImport } from './routes/work.$slug'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const CicdAutomationRoute = CicdAutomationRouteImport.update({
+  id: '/cicd-automation',
+  path: '/cicd-automation',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CloudPlatformsRoute = CloudPlatformsRouteImport.update({
+  id: '/cloud-platforms',
+  path: '/cloud-platforms',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ContactRoute = ContactRouteImport.update({
+  id: '/contact',
+  path: '/contact',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CostOptimisationRoute = CostOptimisationRouteImport.update({
+  id: '/cost-optimisation',
+  path: '/cost-optimisation',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const InfrastructureAsCodeRoute = InfrastructureAsCodeRouteImport.update({
+  id: '/infrastructure-as-code',
+  path: '/infrastructure-as-code',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ReliabilityRoute = ReliabilityRouteImport.update({
+  id: '/reliability',
+  path: '/reliability',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SecurityComplianceRoute = SecurityComplianceRouteImport.update({
+  id: '/security-compliance',
+  path: '/security-compliance',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const WorkSlugRoute = WorkSlugRouteImport.update({
+  id: '/work/$slug',
+  path: '/work/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/cicd-automation': typeof CicdAutomationRoute
+  '/cloud-platforms': typeof CloudPlatformsRoute
+  '/contact': typeof ContactRoute
+  '/cost-optimisation': typeof CostOptimisationRoute
+  '/infrastructure-as-code': typeof InfrastructureAsCodeRoute
+  '/reliability': typeof ReliabilityRoute
+  '/security-compliance': typeof SecurityComplianceRoute
+  '/work/$slug': typeof WorkSlugRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/cicd-automation': typeof CicdAutomationRoute
+  '/cloud-platforms': typeof CloudPlatformsRoute
+  '/contact': typeof ContactRoute
+  '/cost-optimisation': typeof CostOptimisationRoute
+  '/infrastructure-as-code': typeof InfrastructureAsCodeRoute
+  '/reliability': typeof ReliabilityRoute
+  '/security-compliance': typeof SecurityComplianceRoute
+  '/work/$slug': typeof WorkSlugRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/cicd-automation': typeof CicdAutomationRoute
+  '/cloud-platforms': typeof CloudPlatformsRoute
+  '/contact': typeof ContactRoute
+  '/cost-optimisation': typeof CostOptimisationRoute
+  '/infrastructure-as-code': typeof InfrastructureAsCodeRoute
+  '/reliability': typeof ReliabilityRoute
+  '/security-compliance': typeof SecurityComplianceRoute
+  '/work/$slug': typeof WorkSlugRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/cicd-automation'
+    | '/cloud-platforms'
+    | '/contact'
+    | '/cost-optimisation'
+    | '/infrastructure-as-code'
+    | '/reliability'
+    | '/security-compliance'
+    | '/work/$slug'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/cicd-automation'
+    | '/cloud-platforms'
+    | '/contact'
+    | '/cost-optimisation'
+    | '/infrastructure-as-code'
+    | '/reliability'
+    | '/security-compliance'
+    | '/work/$slug'
+  id:
+    | '__root__'
+    | '/'
+    | '/cicd-automation'
+    | '/cloud-platforms'
+    | '/contact'
+    | '/cost-optimisation'
+    | '/infrastructure-as-code'
+    | '/reliability'
+    | '/security-compliance'
+    | '/work/$slug'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  CicdAutomationRoute: typeof CicdAutomationRoute
+  CloudPlatformsRoute: typeof CloudPlatformsRoute
+  ContactRoute: typeof ContactRoute
+  CostOptimisationRoute: typeof CostOptimisationRoute
+  InfrastructureAsCodeRoute: typeof InfrastructureAsCodeRoute
+  ReliabilityRoute: typeof ReliabilityRoute
+  SecurityComplianceRoute: typeof SecurityComplianceRoute
+  WorkSlugRoute: typeof WorkSlugRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +156,75 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/cicd-automation': {
+      id: '/cicd-automation'
+      path: '/cicd-automation'
+      fullPath: '/cicd-automation'
+      preLoaderRoute: typeof CicdAutomationRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/cloud-platforms': {
+      id: '/cloud-platforms'
+      path: '/cloud-platforms'
+      fullPath: '/cloud-platforms'
+      preLoaderRoute: typeof CloudPlatformsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/contact': {
+      id: '/contact'
+      path: '/contact'
+      fullPath: '/contact'
+      preLoaderRoute: typeof ContactRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/cost-optimisation': {
+      id: '/cost-optimisation'
+      path: '/cost-optimisation'
+      fullPath: '/cost-optimisation'
+      preLoaderRoute: typeof CostOptimisationRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/infrastructure-as-code': {
+      id: '/infrastructure-as-code'
+      path: '/infrastructure-as-code'
+      fullPath: '/infrastructure-as-code'
+      preLoaderRoute: typeof InfrastructureAsCodeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/reliability': {
+      id: '/reliability'
+      path: '/reliability'
+      fullPath: '/reliability'
+      preLoaderRoute: typeof ReliabilityRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/security-compliance': {
+      id: '/security-compliance'
+      path: '/security-compliance'
+      fullPath: '/security-compliance'
+      preLoaderRoute: typeof SecurityComplianceRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/work/$slug': {
+      id: '/work/$slug'
+      path: '/work/$slug'
+      fullPath: '/work/$slug'
+      preLoaderRoute: typeof WorkSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  CicdAutomationRoute: CicdAutomationRoute,
+  CloudPlatformsRoute: CloudPlatformsRoute,
+  ContactRoute: ContactRoute,
+  CostOptimisationRoute: CostOptimisationRoute,
+  InfrastructureAsCodeRoute: InfrastructureAsCodeRoute,
+  ReliabilityRoute: ReliabilityRoute,
+  SecurityComplianceRoute: SecurityComplianceRoute,
+  WorkSlugRoute: WorkSlugRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

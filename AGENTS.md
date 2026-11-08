@@ -28,3 +28,8 @@ use the editor.
   own key and store it in Secrets.
 - **Secrets.** Lovable manages them. Do not put secret values in the repo.
 <!-- LOVABLE:END -->
+
+## Project rules
+- All portfolio copy (pages, case studies, metrics, projects, contact links) lives in `src/data/portfolio.ts`; pages render from it, so content edits never touch layout code.
+- Each work page is a thin route that renders the shared `PillarPage`; case studies open at `/work/$slug` — keeps one layout for all six pages.
+- The contact form opens a pre-filled email (no backend) — avoids storing visitor data until a backend is needed.
