@@ -61,13 +61,15 @@ function ContactPage() {
               Got something slow, fragile or <span className="text-gradient">expensive?</span>
             </h1>
             <p className="mt-6 max-w-md text-lg text-ink-muted">
-              Send me the problem. I reply within one working day with what I'd look at first.
+              Send me the problem and I'll tell you what I'd look at first. Based in {profile.location}, with {profile.workAuth.toLowerCase()}.
             </p>
             <ul className="mt-10 space-y-3">
               {[
                 { icon: Mail, label: profile.email, href: `mailto:${profile.email}`, ok: contactVerified.email },
                 { icon: Linkedin, label: "LinkedIn", href: profile.linkedin, ok: contactVerified.linkedin },
-                { icon: Github, label: "GitHub", href: profile.github, ok: contactVerified.github },
+                ...(profile.github
+                  ? [{ icon: Github, label: "GitHub", href: profile.github, ok: contactVerified.github }]
+                  : []),
               ].map(({ icon: Icon, label, href, ok }) => (
                 <li key={label}>
                   <a

@@ -46,6 +46,9 @@ export function SiteFooter() {
         <div>
           <p className="font-display text-2xl font-semibold">{profile.name}</p>
           <p className="mt-2 max-w-sm text-sm text-ink-muted">{profile.positioning}</p>
+          <p className="mt-2 text-sm text-ink-muted">
+            {profile.location} · {profile.workAuth}
+          </p>
         </div>
         <nav aria-label="Footer" className="grid grid-cols-2 gap-x-6 gap-y-2 text-sm">
           {pillars.map((p) => (
@@ -60,11 +63,13 @@ export function SiteFooter() {
               <Linkedin />
             </a>
           </Button>
-          <Button asChild variant="ghostInk" size="icon" className="rounded-full">
-            <a href={profile.github} target="_blank" rel="noreferrer" aria-label="GitHub">
-              <Github />
-            </a>
-          </Button>
+          {profile.github && (
+            <Button asChild variant="ghostInk" size="icon" className="rounded-full">
+              <a href={profile.github} target="_blank" rel="noreferrer" aria-label="GitHub">
+                <Github />
+              </a>
+            </Button>
+          )}
           <Button asChild variant="ghostInk" size="icon" className="rounded-full">
             <a href={`mailto:${profile.email}`} aria-label="Email">
               <Mail />

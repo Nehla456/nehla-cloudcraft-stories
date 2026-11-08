@@ -1,12 +1,12 @@
 const lines: { t: string; tone?: "muted" | "ok" | "accent" }[] = [
-  { t: "$ terraform apply -auto-approve", tone: "accent" },
-  { t: "module.eks.aws_eks_cluster.this: Creating...", tone: "muted" },
-  { t: "Apply complete! Resources: 42 added.", tone: "ok" },
-  { t: "$ gh workflow run release.yml", tone: "accent" },
-  { t: "✓ build   ✓ test   ✓ scan   ✓ deploy", tone: "ok" },
-  { t: "release v2.14.0 → prod in 7m 52s", tone: "muted" },
-  { t: "$ kubectl get slo checkout", tone: "accent" },
-  { t: "checkout   99.97%   budget 71% left", tone: "ok" },
+  { t: "$ terraform apply", tone: "accent" },
+  { t: "module.vpc.aws_vpc.main: Creating...", tone: "muted" },
+  { t: "Apply complete!", tone: "ok" },
+  { t: "$ jenkins build aras-delivery --env VAL", tone: "accent" },
+  { t: "✓ extract   ✓ rename   ✓ publish   ✓ deploy", tone: "ok" },
+  { t: "artifact → JFrog Artifactory", tone: "muted" },
+  { t: "$ kubectl get pods -n prod", tone: "accent" },
+  { t: "all pods Running · 0 restarts", tone: "ok" },
 ];
 
 const toneClass = { muted: "text-ink-muted", ok: "text-signal", accent: "text-primary-glow" } as const;

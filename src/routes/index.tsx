@@ -23,13 +23,13 @@ export const Route = createFileRoute("/")({
   head: () => ({
     meta: seo(
       "Nehla K J — Cloud DevOps Engineer, AWS & Terraform",
-      "Cloud DevOps Engineer, AWS & Terraform, for banking, healthcare and aerospace. Faster deployments, steadier platforms and leaner cloud bills.",
+      "Paris-based Cloud DevOps Engineer with 5+ years on AWS and Azure for Airbus, NatWest and Optum. Deployments from 2 hours to 15 minutes, cloud costs down 20%.",
     ),
   }),
   component: Index,
 });
 
-const featured = ["bank-release-pipeline", "terraform-module-library", "aws-cost-reduction"]
+const featured = ["airbus-software-delivery", "optum-reusable-modules", "optum-cloud-cost-reduction"]
   .map(getCaseStudy)
   .filter((c): c is CaseStudy => Boolean(c));
 
@@ -49,14 +49,14 @@ function Index() {
           <Reveal>
             <p className="inline-flex items-center gap-2 rounded-full border border-ink-border bg-ink-soft px-3 py-1.5 font-mono text-xs text-ink-muted">
               <span className="size-2 animate-pulse rounded-full bg-signal" />
-              {profile.name} · AWS · Terraform · Kubernetes
+              {profile.location} · {profile.workAuth}
             </p>
             <h1 className="mt-7 text-[3.2rem] font-bold leading-[0.92] sm:text-7xl lg:text-[5.6rem]">
               I build cloud platforms that <span className="text-gradient">ship fast</span> and stay up.
             </h1>
             <p className="mt-7 max-w-xl text-lg text-ink-muted md:text-xl">
-              Cloud DevOps Engineer for banking, healthcare and aerospace. I make releases faster, platforms steadier
-              and cloud bills smaller — built in Terraform, with the audit trail to prove it.
+              Cloud DevOps Engineer with 5+ years running production on AWS and Azure for Airbus, NatWest and Optum.
+              Deployments from 2 hours to 15 minutes, provisioning from 5 hours to 1.5, cloud costs down 20%.
             </p>
             <div className="mt-10 flex flex-wrap gap-3">
               <Button asChild variant="hero" size="xl">
@@ -114,7 +114,7 @@ function Index() {
           <Reveal className="flex flex-wrap items-end justify-between gap-6">
             <div>
               <p className="eyebrow text-primary-glow">The work</p>
-              <h2 className="mt-3 max-w-2xl text-4xl font-bold md:text-6xl">Six things I do. All of them measured.</h2>
+              <h2 className="mt-3 max-w-2xl text-4xl font-bold md:text-6xl">Six things I do. Backed by real projects.</h2>
             </div>
           </Reveal>
           <div className="mt-12 grid gap-px overflow-hidden rounded-3xl border border-ink-border bg-ink-border sm:grid-cols-2 lg:grid-cols-3">
