@@ -18,7 +18,7 @@ export function CaseStudyCard({ study }: { study: CaseStudy }) {
       </div>
       {lead && (
         <>
-          <p className="mt-8 font-display text-6xl font-bold leading-none tracking-tight text-gradient md:text-7xl">
+          <p className="mt-8 font-display text-5xl font-bold leading-none tracking-tight text-gradient md:text-6xl">
             {lead.value}
           </p>
           <p className="mt-2 text-sm font-semibold text-muted-foreground">{lead.label}</p>

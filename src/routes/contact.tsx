@@ -49,7 +49,7 @@ function ContactPage() {
   }
 
   return (
-    <PageShell cta={false}>
+    <PageShell cta={false} fill>
       <section className="section-ink relative overflow-hidden">
         <div className="grid-lines pointer-events-none absolute inset-0 text-ink-foreground" />
         <div className="relative mx-auto grid max-w-7xl gap-14 px-5 py-16 md:px-8 md:py-24 lg:grid-cols-[1fr_1.1fr]">

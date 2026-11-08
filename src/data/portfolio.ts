@@ -127,7 +127,7 @@ export const pillars: Pillar[] = [
     seoDescription:
       "Infrastructure as Code work by Nehla K J: Terraform modules, CloudFormation and Ansible standards that cut provisioning from days to minutes.",
     metrics: [
-      { value: "3 days→40 min", label: "Environment setup" },
+      { value: "40 min", label: "New environment (was 3 days)" },
       { value: "34", label: "Repos standardised" },
       { value: "-90%", label: "Config drift incidents" },
     ],
@@ -473,7 +473,7 @@ export const caseStudies: CaseStudy[] = [
       ],
     },
     results: [
-      { value: "3 days→40 min", label: "Environment setup" },
+      { value: "40 min", label: "New environment (was 3 days)" },
       { value: "34", label: "Repos standardised" },
       { value: "-90%", label: "Drift incidents" },
       { value: "1,900", label: "Resources brought under code" },
