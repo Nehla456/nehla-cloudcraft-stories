@@ -120,10 +120,12 @@ function Index() {
                   </div>
                   <h3 className="mt-8 text-3xl font-bold leading-tight">{p.title}</h3>
                   <p className="mt-3 text-ink-muted">{p.headline}</p>
-                  <div className="mt-auto flex items-baseline gap-2 pt-8">
-                    <span className="font-display text-3xl font-bold text-gradient">{p.metrics[0].value}</span>
-                    <span className="text-sm text-ink-muted">{p.metrics[0].label}</span>
-                  </div>
+                  {p.metrics[0] && (
+                    <div className="mt-auto flex items-baseline gap-2 pt-8">
+                      <span className="font-display text-3xl font-bold text-gradient">{p.metrics[0].value}</span>
+                      <span className="text-sm text-ink-muted">{p.metrics[0].label}</span>
+                    </div>
+                  )}
                   <span className="absolute inset-x-0 bottom-0 h-0.5 origin-left scale-x-0 bg-gradient-primary transition-transform duration-500 group-hover:scale-x-100" />
                 </Link>
               </Reveal>

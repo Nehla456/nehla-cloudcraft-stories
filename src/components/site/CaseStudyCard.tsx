@@ -16,8 +16,14 @@ export function CaseStudyCard({ study }: { study: CaseStudy }) {
           <ArrowUpRight className="size-4" />
         </span>
       </div>
-      <p className="mt-8 font-display text-6xl font-bold leading-none tracking-tight text-gradient md:text-7xl">{lead.value}</p>
-      <p className="mt-2 text-sm font-semibold text-muted-foreground">{lead.label}</p>
+      {lead && (
+        <>
+          <p className="mt-8 font-display text-6xl font-bold leading-none tracking-tight text-gradient md:text-7xl">
+            {lead.value}
+          </p>
+          <p className="mt-2 text-sm font-semibold text-muted-foreground">{lead.label}</p>
+        </>
+      )}
       <h3 className="mt-6 text-2xl font-bold leading-tight md:text-[1.7rem]">{study.title}</h3>
       <p className="mt-3 text-muted-foreground">{study.summary}</p>
       <div className="mt-auto flex flex-wrap gap-1.5 pt-6">

@@ -29,7 +29,7 @@ const schema = z.object({
 });
 
 function ContactPage() {
-  const [errors, setErrors] = useState<Record<string, string>>({});
+  const [errors, setErrors] = useState<Partial<Record<string, string>>>({});
 
   function onSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -97,16 +97,16 @@ function ContactPage() {
             >
               <h2 className="text-3xl font-bold">Start a conversation</h2>
               <div className="mt-8 grid gap-5 sm:grid-cols-2">
-                <Field id="name" label="Name" error={errors.name}>
+                <Field id="name" label="Name" error={errors["name"]}>
                   <Input id="name" name="name" autoComplete="name" className="h-11" />
                 </Field>
-                <Field id="email" label="Email" error={errors.email}>
+                <Field id="email" label="Email" error={errors["email"]}>
                   <Input id="email" name="email" type="email" autoComplete="email" className="h-11" />
                 </Field>
                 <Field id="company" label="Company (optional)" className="sm:col-span-2">
                   <Input id="company" name="company" autoComplete="organization" className="h-11" />
                 </Field>
-                <Field id="message" label="What's the problem?" error={errors.message} className="sm:col-span-2">
+                <Field id="message" label="What's the problem?" error={errors["message"]} className="sm:col-span-2">
                   <Textarea
                     id="message"
                     name="message"
@@ -136,8 +136,8 @@ function Field({
 }: {
   id: string;
   label: string;
-  error?: string;
-  className?: string;
+  error?: string | undefined;
+  className?: string | undefined;
   children: ReactNode;
 }) {
   return (

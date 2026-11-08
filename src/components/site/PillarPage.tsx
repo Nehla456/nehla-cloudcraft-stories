@@ -11,7 +11,7 @@ export function PillarPage({ slug }: { slug: PillarSlug }) {
   const pillar = getPillar(slug);
   const studies = caseStudiesFor(slug);
   const index = pillars.findIndex((p) => p.slug === slug);
-  const next = pillars[(index + 1) % pillars.length];
+  const next = pillars[(index + 1) % pillars.length] ?? pillar;
 
   return (
     <PageShell>
