@@ -1,7 +1,8 @@
 import { Link } from "@tanstack/react-router";
 import { ArrowRight, ArrowUpRight, Github } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { caseStudiesFor, getPillar, pillars, projects, type PillarSlug } from "@/data/portfolio";
+import { caseStudiesFor, getPillar, isPlaceholder, pillars, projects, type PillarSlug } from "@/data/portfolio";
+import { PlaceholderTag } from "./Placeholder";
 import { CaseStudyCard } from "./CaseStudyCard";
 import { MetricStat } from "./MetricStat";
 import { PageShell } from "./PageShell";
@@ -97,9 +98,9 @@ export function PillarPage({ slug }: { slug: PillarSlug }) {
           <div className="mt-12 grid gap-6 lg:grid-cols-3">
             {projects.map((p, i) => (
               <Reveal key={p.name} delay={i * 100} as="article" className="flex flex-col rounded-3xl border border-border bg-card p-7 shadow-card">
-                <div className="flex items-center justify-between">
+                <div className="flex items-center justify-between gap-3">
                   <span className="font-mono text-lg font-semibold">{p.name}</span>
-                  <Github className="size-5 text-muted-foreground" />
+                  {isPlaceholder(p) ? <PlaceholderTag /> : <Github className="size-5 text-muted-foreground" />}
                 </div>
                 <p className="mt-3 text-muted-foreground">{p.description}</p>
                 <dl className="mt-6 space-y-3 text-sm">
@@ -119,11 +120,15 @@ export function PillarPage({ slug }: { slug: PillarSlug }) {
                     </span>
                   ))}
                 </div>
-                <Button asChild variant="outlineBold" className="mt-auto self-start rounded-full" style={{ marginTop: "1.75rem" }}>
-                  <a href={p.repo} target="_blank" rel="noreferrer">
-                    View repo <ArrowUpRight />
-                  </a>
-                </Button>
+                {isPlaceholder(p) ? (
+                  <p className="mt-auto pt-7 font-mono text-xs text-muted-foreground">Repo link pending verification</p>
+                ) : (
+                  <Button asChild variant="outlineBold" className="mt-auto self-start rounded-full" style={{ marginTop: "1.75rem" }}>
+                    <a href={p.repo} target="_blank" rel="noreferrer">
+                      View repo <ArrowUpRight />
+                    </a>
+                  </Button>
+                )}
               </Reveal>
             ))}
           </div>

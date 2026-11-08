@@ -6,7 +6,8 @@ import { MetricStat } from "@/components/site/MetricStat";
 import { PageShell } from "@/components/site/PageShell";
 import { PipelineDiagram } from "@/components/site/PipelineDiagram";
 import { Reveal } from "@/components/site/Reveal";
-import { caseStudies, getCaseStudy, getPillar } from "@/data/portfolio";
+import { caseStudies, getCaseStudy, getPillar, isPlaceholder } from "@/data/portfolio";
+import { PlaceholderTag } from "@/components/site/Placeholder";
 import { seo } from "@/lib/seo";
 
 export const Route = createFileRoute("/work/$slug")({
@@ -38,6 +39,7 @@ function CaseStudyPage() {
   const { study } = Route.useLoaderData();
   const pillar = getPillar(study.pillar);
   const related = caseStudies.filter((c) => c.slug !== study.slug && c.pillar === study.pillar);
+  const placeholder = isPlaceholder(study);
   const more = related.length ? related : caseStudies.filter((c) => c.slug !== study.slug).slice(0, 2);
 
   return (
@@ -52,9 +54,17 @@ function CaseStudyPage() {
             <ArrowLeft className="size-3.5" /> {pillar.number} — {pillar.title}
           </Link>
           <Reveal className="mt-8">
-            <span className="rounded-full border border-ink-border px-3 py-1 font-mono text-xs text-primary-glow">{study.sector}</span>
+            <span className="flex flex-wrap items-center gap-2">
+              <span className="rounded-full border border-ink-border px-3 py-1 font-mono text-xs text-primary-glow">{study.sector}</span>
+              {placeholder && <PlaceholderTag tone="ink" />}
+            </span>
             <h1 className="mt-6 max-w-5xl text-5xl font-bold leading-[0.95] md:text-7xl">{study.title}</h1>
             <p className="mt-6 max-w-2xl text-lg text-ink-muted md:text-xl">{study.summary}</p>
+            {placeholder && (
+              <p className="mt-6 max-w-2xl rounded-2xl border border-dashed border-pending-ink/60 px-4 py-3 text-sm text-pending-ink">
+                Placeholder case study. Client, figures and details are sample content and not yet verified.
+              </p>
+            )}
           </Reveal>
           <dl className="mt-12 grid gap-6 border-t border-ink-border pt-8 sm:grid-cols-3">
             {[
@@ -78,7 +88,7 @@ function CaseStudyPage() {
           <div className="mt-8 grid grid-cols-2 gap-8 lg:grid-cols-4">
             {study.results.map((m, i) => (
               <Reveal key={m.label} delay={i * 80}>
-                <MetricStat metric={m} />
+                <MetricStat metric={m} placeholder={placeholder} />
               </Reveal>
             ))}
           </div>

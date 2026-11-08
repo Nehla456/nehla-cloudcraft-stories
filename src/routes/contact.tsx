@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { ArrowUpRight, FileText, Github, Linkedin, Mail } from "lucide-react";
+import { ArrowUpRight, Github, Linkedin, Mail } from "lucide-react";
 import { useState, type FormEvent, type ReactNode } from "react";
 import { z } from "zod";
 import { Button } from "@/components/ui/button";
@@ -8,7 +8,9 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { PageShell } from "@/components/site/PageShell";
 import { Reveal } from "@/components/site/Reveal";
-import { profile } from "@/data/portfolio";
+import { contactVerified, profile } from "@/data/portfolio";
+import { CvActions } from "@/components/site/CvActions";
+import { PlaceholderTag } from "@/components/site/Placeholder";
 import { seo } from "@/lib/seo";
 
 export const Route = createFileRoute("/contact")({
@@ -63,10 +65,10 @@ function ContactPage() {
             </p>
             <ul className="mt-10 space-y-3">
               {[
-                { icon: Mail, label: profile.email, href: `mailto:${profile.email}` },
-                { icon: Linkedin, label: "LinkedIn", href: profile.linkedin },
-                { icon: Github, label: "GitHub", href: profile.github },
-              ].map(({ icon: Icon, label, href }) => (
+                { icon: Mail, label: profile.email, href: `mailto:${profile.email}`, ok: contactVerified.email },
+                { icon: Linkedin, label: "LinkedIn", href: profile.linkedin, ok: contactVerified.linkedin },
+                { icon: Github, label: "GitHub", href: profile.github, ok: contactVerified.github },
+              ].map(({ icon: Icon, label, href, ok }) => (
                 <li key={label}>
                   <a
                     href={href}
@@ -78,15 +80,14 @@ function ContactPage() {
                       <Icon className="size-4" />
                     </span>
                     {label}
+                    {!ok && <PlaceholderTag tone="ink" />}
                   </a>
                 </li>
               ))}
             </ul>
-            <Button asChild variant="ghostInk" size="xl" className="mt-10">
-              <a href={`mailto:${profile.email}?subject=${encodeURIComponent("CV request")}`}>
-                <FileText /> Request my CV
-              </a>
-            </Button>
+            <div className="mt-10 flex flex-wrap gap-3">
+              <CvActions />
+            </div>
           </Reveal>
 
           <Reveal delay={150}>
