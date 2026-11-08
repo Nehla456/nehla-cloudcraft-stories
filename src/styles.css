@@ -47,6 +47,8 @@
   --color-ink-muted: var(--ink-muted);
   --color-ink-border: var(--ink-border);
   --color-signal: var(--signal);
+  --color-pending: var(--pending);
+  --color-pending-ink: var(--pending-ink);
   --color-chart-1: var(--chart-1);
   --color-chart-2: var(--chart-2);
   --color-chart-3: var(--chart-3);
@@ -94,6 +96,9 @@
   --ink-muted: oklch(0.7 0.02 285);
   --ink-border: oklch(0.32 0.03 285);
   --signal: oklch(0.82 0.19 145);
+  /* Placeholder / unverified content marker */
+  --pending: oklch(0.52 0.13 60);
+  --pending-ink: oklch(0.84 0.14 80);
 
   --gradient-primary: linear-gradient(120deg, var(--primary) 0%, var(--primary-glow) 100%);
   --gradient-ink: radial-gradient(

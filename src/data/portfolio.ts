@@ -1,5 +1,13 @@
 // All portfolio copy lives here. Pages render from this data.
-// NOTE: metrics, sectors and project details are sample content until replaced with real figures.
+// Verification: any metric, case study, project or contact link WITHOUT `verified: true`
+// is shown on the site with a "Placeholder" tag. Add `verified: true` only once confirmed.
+
+/** Absence of `verified: true` means the item is a placeholder. */
+export type Verifiable = { verified?: true };
+
+export function isPlaceholder(item: Verifiable) {
+  return item.verified !== true;
+}
 
 export const profile = {
   name: "Nehla K J",
@@ -10,7 +18,28 @@ export const profile = {
   github: "https://github.com/nehlakj",
 };
 
-export type Metric = { value: string; label: string; detail?: string };
+/** Mark a contact link `true` once it is confirmed as real. */
+export const contactVerified: Record<"email" | "linkedin" | "github", boolean> = {
+  email: false,
+  linkedin: false,
+  github: false,
+};
+
+/** CV download. Set `file` to a same-origin path (e.g. "/downloads/Nehla-KJ-CV.pdf") once the file is added. */
+export type CvConfig = { file: string | null; filename: string };
+export const cv: CvConfig = { file: null, filename: "Nehla-KJ-CV.pdf" };
+
+export type CvOption =
+  | { kind: "download"; href: string; filename: string }
+  | { kind: "email"; href: string };
+
+/** Download first when a file exists; the email request is always kept as a fallback. */
+export function cvOptions(config: CvConfig, email: string): CvOption[] {
+  const request: CvOption = { kind: "email", href: `mailto:${email}?subject=${encodeURIComponent("CV request")}` };
+  return config.file ? [{ kind: "download", href: config.file, filename: config.filename }, request] : [request];
+}
+
+export type Metric = { value: string; label: string; detail?: string } & Verifiable;
 
 export const headlineMetrics: Metric[] = [
   { value: "-82%", label: "Deployment time", detail: "45 min → 8 min per release" },
@@ -125,7 +154,7 @@ export const pillars: Pillar[] = [
     intro:
       "Reusable Terraform modules and standards that make a new environment a pull request — not a three-day ticket queue.",
     seoDescription:
-      "Infrastructure as Code work by Nehla K J: Terraform modules, CloudFormation and Ansible standards that cut provisioning from days to minutes.",
+      "Infrastructure as Code work by Nehla K J: Terraform modules, CloudFormation and Ansible standards for fast, consistent provisioning.",
     metrics: [
       { value: "40 min", label: "New environment (was 3 days)" },
       { value: "34", label: "Repos standardised" },
@@ -301,7 +330,8 @@ export const pillars: Pillar[] = [
 export type Block = { heading: string; body?: string; bullets?: string[] };
 export type DiagramStep = { label: string; detail: string };
 
-export type CaseStudy = {
+/** A case study's `verified` flag covers its story and its results. */
+export type CaseStudy = Verifiable & {
   slug: string;
   pillar: PillarSlug;
   title: string;
@@ -847,7 +877,8 @@ export const caseStudies: CaseStudy[] = [
   },
 ];
 
-export type Project = {
+/** Unverified projects show no repo link. */
+export type Project = Verifiable & {
   name: string;
   description: string;
   architecture: string;
@@ -882,6 +913,17 @@ export const projects: Project[] = [
     repo: "https://github.com/nehlakj/slo-kit",
   },
 ];
+
+/** True while any sample content is still on the site. */
+export function hasPlaceholders() {
+  return (
+    headlineMetrics.some(isPlaceholder) ||
+    pillars.some((p) => p.metrics.some(isPlaceholder)) ||
+    caseStudies.some(isPlaceholder) ||
+    projects.some(isPlaceholder) ||
+    Object.values(contactVerified).some((v) => !v)
+  );
+}
 
 export function getPillar(slug: PillarSlug) {
   const pillar = pillars.find((p) => p.slug === slug);
