@@ -1,6 +1,9 @@
 // All portfolio copy lives here. Pages render from this data.
 // Verification: any metric, case study, project or contact link WITHOUT `verified: true`
 // is shown on the site with a "Placeholder" tag. Add `verified: true` only once confirmed.
+// Source of verified content: Nehla's CV (France Travail version) and her experience notes.
+
+import cvAsset from "@/assets/Nehla-KJ-CV.pdf.asset.json";
 
 /** Absence of `verified: true` means the item is a placeholder. */
 export type Verifiable = { verified?: true };
@@ -11,23 +14,27 @@ export function isPlaceholder(item: Verifiable) {
 
 export const profile = {
   name: "Nehla K J",
+  fullName: "Nehla Kallungal Jaleel",
   role: "Cloud DevOps Engineer",
   positioning: "Cloud DevOps Engineer, AWS & Terraform | Regulated Industries (Banking, Healthcare, Aerospace)",
-  email: "hello@nehlakj.dev",
+  location: "Paris, France",
+  workAuth: "Full French work authorization",
+  email: "nehlajaleel1003@gmail.com",
   linkedin: "https://www.linkedin.com/in/nehlakj",
-  github: "https://github.com/nehlakj",
+  /** Set to the GitHub profile URL once shared; links stay hidden while null. */
+  github: null as string | null,
 };
 
-/** Mark a contact link `true` once it is confirmed as real. */
+/** Mark a contact link `true` once it is confirmed as real. Links set to null are hidden, not tagged. */
 export const contactVerified: Record<"email" | "linkedin" | "github", boolean> = {
-  email: false,
-  linkedin: false,
+  email: true,
+  linkedin: true,
   github: false,
 };
 
-/** CV download. Set `file` to a same-origin path (e.g. "/downloads/Nehla-KJ-CV.pdf") once the file is added. */
+/** CV download. `file` is a same-origin URL; null shows only the email request. */
 export type CvConfig = { file: string | null; filename: string };
-export const cv: CvConfig = { file: null, filename: "Nehla-KJ-CV.pdf" };
+export const cv: CvConfig = { file: cvAsset.url, filename: "Nehla-KJ-CV.pdf" };
 
 export type CvOption =
   | { kind: "download"; href: string; filename: string }
@@ -42,49 +49,52 @@ export function cvOptions(config: CvConfig, email: string): CvOption[] {
 export type Metric = { value: string; label: string; detail?: string } & Verifiable;
 
 export const headlineMetrics: Metric[] = [
-  { value: "-82%", label: "Deployment time", detail: "45 min → 8 min per release" },
-  { value: "99.95%", label: "Uptime held", detail: "Across 3 production platforms" },
-  { value: "-38%", label: "AWS spend", detail: "≈ £410k saved per year" },
-  { value: "40 min", label: "New environment", detail: "Down from 3 days" },
-  { value: "120 h", label: "Manual work removed", detail: "Every month, per team" },
+  { value: "2h→15m", label: "Deployment time", detail: "Airbus software delivery", verified: true },
+  { value: "80%", label: "Manual deploy work removed", detail: "Pensions platform, TCS", verified: true },
+  { value: "5h→1.5h", label: "Provisioning time", detail: "50+ repos, Optum", verified: true },
+  { value: "-20%", label: "Cloud costs", detail: "AWS & Azure, Optum", verified: true },
+  { value: "99.9%", label: "Uptime", detail: "Serverless ETL, NatWest", verified: true },
 ];
 
 export const sectors = [
   {
     name: "Banking",
-    line: "Payment and lending platforms under PCI DSS and internal risk controls.",
+    line: "NatWest and a pensions & savings platform: serverless pipelines, contact centre and CI/CD.",
   },
   {
     name: "Healthcare",
-    line: "Patient-data workloads built for HIPAA and audit-ready by default.",
+    line: "Optum: AWS and Azure automation in a HIPAA-regulated environment.",
   },
   {
     name: "Aerospace",
-    line: "Engineering and MRO systems where change control is not optional.",
+    line: "Airbus: enterprise DevOps platforms across INT, VAL and PROD.",
   },
 ];
 
 export const stack = [
   "AWS",
+  "Azure",
   "Terraform",
-  "Kubernetes / EKS",
-  "GitHub Actions",
-  "GitLab CI",
-  "Jenkins",
-  "ArgoCD",
-  "Ansible",
   "CloudFormation",
+  "Ansible",
+  "Kubernetes / EKS",
   "Docker",
   "Helm",
+  "Jenkins",
+  "GitLab CI/CD",
+  "GitHub Actions",
+  "Azure DevOps",
+  "JFrog Artifactory",
+  "SonarQube",
   "Prometheus",
   "Grafana",
+  "Datadog",
   "ELK",
   "CloudWatch",
   "Lambda",
-  "Azure",
+  "Step Functions",
   "Python",
   "Bash",
-  "Vault",
 ];
 
 export type PillarSlug =
@@ -118,30 +128,30 @@ export const pillars: Pillar[] = [
     short: "CI/CD",
     headline: "Releases that take minutes, not meetings.",
     intro:
-      "I design pipelines that build, test, scan and ship on every merge — and delete the manual steps that slow teams down.",
+      "I turn manual release runbooks into pipelines — one path from package to production, the same in every environment.",
     seoDescription:
-      "CI/CD case studies by Nehla K J: pipeline design, deployment automation and manual work removed in banking and healthcare.",
+      "CI/CD work by Nehla K J: Jenkins, GitLab CI/CD and GitHub Actions pipelines for Airbus and a pensions platform, cutting deployment time from 2 hours to 15 minutes.",
     metrics: [
-      { value: "45→8 min", label: "Release time" },
-      { value: "12×", label: "More deploys per week" },
-      { value: "-71%", label: "Failed changes" },
+      { value: "2h→15m", label: "Deployment time (Airbus)", verified: true },
+      { value: "80%", label: "Manual deploy work removed (TCS)", verified: true },
+      { value: "3", label: "Environments on one pipeline: INT, VAL, PROD", verified: true },
     ],
     focusTitle: "What I build",
     focus: [
       {
         title: "Pipeline design",
-        body: "One reusable pipeline template per stack. Build, test, scan, deploy — same stages for every service.",
-        tags: ["GitHub Actions", "GitLab CI", "Jenkins"],
+        body: "Jenkins and GitLab CI/CD pipelines that standardise delivery across INT, VAL and PROD.",
+        tags: ["Jenkins", "GitLab CI/CD", "GitHub Actions"],
       },
       {
         title: "Deployment automation",
-        body: "GitOps rollouts with automatic rollback. Nobody SSHs into production to release.",
-        tags: ["ArgoCD", "Helm", "Blue/green"],
+        body: "Docker images, Helm charts and blue-green releases, so developers deploy without waiting on ops.",
+        tags: ["Docker", "Helm", "Blue-green"],
       },
       {
         title: "Removing manual work",
-        body: "Change tickets, approvals and release notes generated from the pipeline, not typed by hand.",
-        tags: ["Python", "Bash", "Jira API"],
+        body: "Python and boto3 scripts for the repetitive jobs: Jenkins job management, AWS operations, monitoring tasks.",
+        tags: ["Python", "boto3", "Bash"],
       },
     ],
   },
@@ -152,30 +162,30 @@ export const pillars: Pillar[] = [
     short: "IaC",
     headline: "Every environment, rebuilt from code.",
     intro:
-      "Reusable Terraform modules and standards that make a new environment a pull request — not a three-day ticket queue.",
+      "Reusable Terraform, CloudFormation, ARM and Ansible modules that turn hours of provisioning into a repeatable run.",
     seoDescription:
-      "Infrastructure as Code work by Nehla K J: Terraform modules, CloudFormation and Ansible standards for fast, consistent provisioning.",
+      "Infrastructure as Code work by Nehla K J: reusable Terraform, CloudFormation, ARM and Ansible modules across 50+ repositories, cutting provisioning from 5 hours to 1.5.",
     metrics: [
-      { value: "40 min", label: "New environment (was 3 days)" },
-      { value: "34", label: "Repos standardised" },
-      { value: "-90%", label: "Config drift incidents" },
+      { value: "5h→1.5h", label: "Provisioning time", verified: true },
+      { value: "50+", label: "Repositories standardised", verified: true },
+      { value: "-25%", label: "Manual ops effort", verified: true },
     ],
     focusTitle: "How I approach it",
     focus: [
       {
         title: "Modules, not copy-paste",
-        body: "Versioned Terraform modules for VPC, EKS, RDS and IAM. Teams compose, they don't rewrite.",
-        tags: ["Terraform", "Terragrunt", "Registry"],
+        body: "Shared Terraform, CloudFormation and ARM modules that product teams reuse instead of rewriting.",
+        tags: ["Terraform", "CloudFormation", "ARM"],
       },
       {
-        title: "Standards enforced in CI",
-        body: "fmt, validate, tflint, Checkov and a plan review on every PR. Bad config never reaches apply.",
-        tags: ["tflint", "Checkov", "OPA"],
+        title: "Landing zones",
+        body: "Multi-account AWS landing zones, VPC networking and ECS/ECR container workloads, all in Terraform.",
+        tags: ["AWS Organizations", "VPC", "ECS/ECR"],
       },
       {
         title: "Config that converges",
-        body: "Ansible for the OS layer, CloudFormation where the account baseline demands it.",
-        tags: ["Ansible", "CloudFormation", "SSM"],
+        body: "Ansible for configuration management, AWS Image Builder for AMIs, Terraform for the schedules around them.",
+        tags: ["Ansible", "Image Builder", "Terraform"],
       },
     ],
   },
@@ -184,32 +194,32 @@ export const pillars: Pillar[] = [
     number: "03",
     title: "Cloud Platforms & Kubernetes",
     short: "Platforms",
-    headline: "Production platforms that scale on a Tuesday and on Black Friday.",
+    headline: "Production platforms built for regulated traffic.",
     intro:
-      "AWS-first, Azure where the business needs it. EKS for long-running services, serverless for everything event-driven.",
+      "AWS-first, Azure where the business needs it. Containers on EKS and ECS, serverless for event-driven work.",
     seoDescription:
-      "Cloud platform and Kubernetes work by Nehla K J: AWS and Azure architecture, EKS clusters and serverless event-driven services.",
+      "Cloud platform and Kubernetes work by Nehla K J: AWS and Azure, EKS and on-prem Kubernetes, and serverless event-driven pipelines at 99.9% uptime.",
     metrics: [
-      { value: "99.95%", label: "Platform availability" },
-      { value: "6×", label: "Peak traffic absorbed" },
-      { value: "140+", label: "Services on EKS" },
+      { value: "99.9%", label: "Serverless ETL uptime (NatWest)", verified: true },
+      { value: "5+ yrs", label: "Running production on AWS & Azure", verified: true },
+      { value: "3", label: "Regulated sectors: banking, healthcare, aerospace", verified: true },
     ],
     focusTitle: "Platform building blocks",
     focus: [
       {
         title: "Platform architecture",
-        body: "Multi-account AWS with Control Tower, shared networking and a clear blast radius per workload.",
-        tags: ["AWS Organizations", "Transit Gateway", "Azure"],
+        body: "Multi-account AWS, VPC networking and hybrid setups that join on-prem Kubernetes with AWS EKS.",
+        tags: ["AWS", "Azure", "VPC", "Hybrid"],
       },
       {
         title: "Kubernetes & containers",
-        body: "EKS with Karpenter, Helm charts per service type and sane defaults for limits, probes and PDBs.",
-        tags: ["EKS", "Karpenter", "Helm", "Docker"],
+        body: "Dockerised Java services, Helm deployments and EKS workloads across dev, test and production.",
+        tags: ["EKS", "Kubernetes", "Helm", "Docker"],
       },
       {
         title: "Serverless & event-driven",
-        body: "Lambda, SQS and EventBridge for spiky workloads. Pay for the work, not the idle time.",
-        tags: ["Lambda", "EventBridge", "SQS", "Step Functions"],
+        body: "Lambda, Step Functions, EventBridge and DynamoDB for ETL, plus Amazon Connect and Lex for contact centres.",
+        tags: ["Lambda", "Step Functions", "EventBridge", "Amazon Connect"],
       },
     ],
   },
@@ -220,40 +230,40 @@ export const pillars: Pillar[] = [
     short: "Reliability",
     headline: "Know before the customer does.",
     intro:
-      "Monitoring that pages on symptoms, not noise. Runbooks that work at 3am. Recovery that's been rehearsed, not hoped for.",
+      "Dashboards and alarms that catch problems early, on-call that closes them, and failover that's been tested and written down.",
     seoDescription:
-      "Reliability and observability work by Nehla K J: Prometheus, Grafana, ELK and CloudWatch monitoring, incident response and disaster recovery.",
+      "Reliability work by Nehla K J: Prometheus, Grafana, Datadog, ELK and CloudWatch monitoring, on-call incident response, root-cause analysis and disaster recovery.",
     metrics: [
-      { value: "-64%", label: "P1 incidents" },
-      { value: "4h→35m", label: "Mean time to recover" },
-      { value: "-80%", label: "Alert noise" },
+      { value: "99.9%", label: "Uptime, serverless ETL (NatWest)", verified: true },
+      { value: "99%", label: "Uptime, healthcare platforms (Optum)", verified: true },
+      { value: "24/7", label: "Production on-call support", verified: true },
     ],
     focusTitle: "The reliability toolkit",
     focus: [
       {
         title: "Monitoring stack",
-        body: "Prometheus and Grafana for services, ELK for logs, CloudWatch for AWS-native signals — one dashboard per user journey.",
-        tags: ["Prometheus", "Grafana", "ELK", "CloudWatch"],
+        body: "Prometheus, Grafana and Datadog for services, ELK for logs, CloudWatch and X-Ray for AWS-native signals.",
+        tags: ["Prometheus", "Grafana", "Datadog", "ELK", "CloudWatch"],
       },
       {
         title: "Alerting & incidents",
-        body: "SLO-based alerts routed to the owning team, with a runbook link in every page.",
-        tags: ["Alertmanager", "PagerDuty", "SLOs"],
+        body: "CloudWatch dashboards and alarms, SLI/SLO monitoring, on-call rotations and L2/L3 incident resolution.",
+        tags: ["SLI/SLO", "On-call", "ServiceNow"],
       },
       {
         title: "Disaster recovery",
-        body: "Cross-region backups and quarterly restore drills. RTO and RPO are measured, not assumed.",
-        tags: ["AWS Backup", "Route 53", "Aurora Global"],
+        body: "High availability with Auto Scaling, ALB and RDS replication. Failover procedures validated and documented.",
+        tags: ["Auto Scaling", "ALB", "RDS replication"],
       },
       {
         title: "Working with dev teams",
-        body: "Blameless post-mortems, shared on-call and dashboards built with the people who own the code.",
-        tags: ["Post-mortems", "On-call", "Game days"],
+        body: "Runbooks, KT packs and installation guides in Confluence, so the next person fixes it faster.",
+        tags: ["Runbooks", "Confluence", "Knowledge transfer"],
       },
       {
         title: "Production troubleshooting",
-        body: "From kubectl to flame graphs. I stay on the bridge until root cause is fixed, not just patched.",
-        tags: ["kubectl", "X-Ray", "tcpdump"],
+        body: "Root-cause analysis on high-volume job failures, script errors and pod health across prod and non-prod.",
+        tags: ["RCA", "kubectl", "Logs"],
       },
     ],
   },
@@ -264,30 +274,30 @@ export const pillars: Pillar[] = [
     short: "Security",
     headline: "Audit-ready on any given day.",
     intro:
-      "DevSecOps for teams who answer to regulators. Controls live in code, evidence comes out of the pipeline.",
+      "DevSecOps for teams that answer to regulators: quality gates in the pipeline, least-privilege access, tokens instead of passwords.",
     seoDescription:
-      "Security and compliance work by Nehla K J: DevSecOps for HIPAA and banking standards, IAM least privilege, RBAC and secrets management.",
+      "Security and compliance work by Nehla K J: DevSecOps in a HIPAA-regulated environment with zero critical findings, OAuth2 and token auth, IAM and RBAC.",
     metrics: [
-      { value: "0", label: "Critical audit findings" },
-      { value: "-95%", label: "Standing admin access" },
-      { value: "100%", label: "Secrets out of code" },
+      { value: "0", label: "Critical security findings (HIPAA)", verified: true },
+      { value: "OAuth2", label: "Token auth replaced passwords (Airbus)", verified: true },
+      { value: "RBAC", label: "Jenkins access control by role", verified: true },
     ],
     focusTitle: "Controls I put in place",
     focus: [
       {
         title: "Compliance context",
-        body: "HIPAA for patient data, PCI DSS and internal risk frameworks for banking, AS9100 change control in aerospace.",
-        tags: ["HIPAA", "PCI DSS", "ISO 27001"],
+        body: "HIPAA for Optum's healthcare workloads, enterprise security standards for Airbus and NatWest.",
+        tags: ["HIPAA", "Banking", "Aerospace"],
       },
       {
         title: "Access control",
-        body: "IAM least privilege generated from real usage. RBAC in Kubernetes mapped to teams, not individuals.",
-        tags: ["IAM", "SSO", "RBAC", "IRSA"],
+        body: "IAM policies, automated IAM key rotation and Jenkins RBAC that limits job visibility to the right people.",
+        tags: ["IAM", "RBAC", "Key rotation"],
       },
       {
-        title: "Secrets management",
-        body: "KMS-encrypted everything. Secrets Manager with rotation. No credentials in repos, images or env files.",
-        tags: ["KMS", "Secrets Manager", "Vault"],
+        title: "Secrets & scanning",
+        body: "Secrets Manager, token-based credentials, SonarQube quality gates and AWS Inspector scanning.",
+        tags: ["Secrets Manager", "SonarQube", "AWS Inspector"],
       },
     ],
   },
@@ -296,32 +306,31 @@ export const pillars: Pillar[] = [
     number: "06",
     title: "Cost Optimisation & Projects",
     short: "FinOps",
-    headline: "Every pound in the cloud bill earns its place.",
-    intro:
-      "FinOps that engineers actually follow: right-size, schedule, commit — and make the cost visible to the team that spends it.",
+    headline: "Every line on the cloud bill earns its place.",
+    intro: "Right-size, reserve, clean up with policy, and track it — across AWS and Azure.",
     seoDescription:
-      "Cost optimisation and personal projects by Nehla K J: FinOps strategy, AWS right-sizing and savings, plus open-source infrastructure projects on GitHub.",
+      "Cost optimisation by Nehla K J: 20% lower AWS and Azure costs through rightsizing, reserved instances, lifecycle rules and Cloud Custodian policies.",
     metrics: [
-      { value: "-38%", label: "AWS bill" },
-      { value: "£410k", label: "Saved per year" },
-      { value: "100%", label: "Spend tagged to an owner" },
+      { value: "-20%", label: "AWS & Azure costs (Optum)", verified: true },
+      { value: "2", label: "Clouds optimised: AWS and Azure", verified: true },
+      { value: "-25%", label: "Manual effort, via VM scheduling", verified: true },
     ],
     focusTitle: "Cost strategy",
     focus: [
       {
         title: "Make cost visible",
-        body: "Mandatory tagging, per-team dashboards and a weekly cost note in the team channel.",
-        tags: ["Cost Explorer", "CUR", "Athena"],
+        body: "AWS Cost Explorer and Azure Cost Management to see what each workload actually spends.",
+        tags: ["Cost Explorer", "Azure Cost Management"],
       },
       {
         title: "Right-size & schedule",
-        body: "Compute Optimizer data, Graviton migrations and non-prod switched off outside working hours.",
-        tags: ["Compute Optimizer", "Graviton", "Instance Scheduler"],
+        body: "Rightsizing, VM scheduling and on-demand EMR for serverless workloads instead of always-on capacity.",
+        tags: ["Rightsizing", "VM scheduling", "EMR"],
       },
       {
-        title: "Commit & alert",
-        body: "Savings Plans sized to the baseline, Spot for the burst, and budget alerts before the invoice.",
-        tags: ["Savings Plans", "Spot", "AWS Budgets"],
+        title: "Commit & clean up",
+        body: "Reserved instances for the baseline, lifecycle rules for storage, Cloud Custodian policies for the rest.",
+        tags: ["Reserved instances", "Lifecycle rules", "Cloud Custodian"],
       },
     ],
   },
@@ -336,7 +345,7 @@ export type CaseStudy = Verifiable & {
   pillar: PillarSlug;
   title: string;
   summary: string;
-  sector: "Banking" | "Healthcare" | "Aerospace";
+  sector: "Banking" | "Financial services" | "Healthcare" | "Aerospace";
   client: string;
   role: string;
   duration: string;
@@ -349,531 +358,491 @@ export type CaseStudy = Verifiable & {
 export const caseStudies: CaseStudy[] = [
   // 01 — CI/CD
   {
-    slug: "bank-release-pipeline",
+    slug: "airbus-software-delivery",
     pillar: "cicd-automation",
-    title: "From fortnightly releases to 40 deploys a week",
-    summary: "Rebuilt the release path for a retail bank's payments team. 45-minute manual releases became 8-minute automated ones.",
-    sector: "Banking",
-    client: "Tier-1 retail bank · Payments platform",
-    role: "Lead DevOps Engineer",
-    duration: "7 months",
+    verified: true,
+    title: "Airbus software delivery: from 2 hours to 15 minutes",
+    summary: "Replaced a manual, multi-step ARAS release process with one Jenkins pipeline across INT, VAL and PROD.",
+    sector: "Aerospace",
+    client: "Airbus · via Infosys",
+    role: "Associate → Senior Associate Consultant",
+    duration: "08/2024 – 07/2026",
     blocks: [
       {
         heading: "Context",
-        body: "60 microservices, released every two weeks by a 14-step manual runbook. Each release needed 3 engineers and a change board slot. One in five failed.",
+        body: "ARAS software arrived as ZIP packages. Each release meant downloading it, renaming files, building a folder per environment (INT, VAL, PROD), uploading to JFrog Artifactory by hand, then starting Jenkins by hand.",
       },
       {
         heading: "What I owned",
         bullets: [
-          "Pipeline architecture and the shared template library",
-          "Migration of all 60 services off Jenkins freestyle jobs",
-          "Change-management integration with the bank's ServiceNow",
+          "Automating the end-to-end ARAS delivery workflow",
+          "Administering Jenkins, GitLab CI/CD, JFrog Artifactory, Jira and Confluence across INT, VAL and PROD",
         ],
       },
       {
         heading: "Strategy & approach",
-        body: "Standardise first, speed up second. One golden pipeline, opt-in per service, with the change record generated by the pipeline itself so auditors got more evidence, not less.",
+        body: "Every manual step became a pipeline stage. One pipeline, the same naming rules for every environment, no hand-offs.",
       },
       {
         heading: "Execution",
         bullets: [
-          "Reusable GitHub Actions workflows: build → unit → SAST → image scan → deploy",
-          "ArgoCD for GitOps deploys to EKS with automated canary analysis",
-          "Auto-created ServiceNow change records with test and scan evidence attached",
-          "Rollback on error-rate breach in under 90 seconds",
+          "Jenkins pipeline that extracts the ZIP and applies environment naming (zipname_INT / _VAL / _PROD)",
+          "Folders organised and published to JFrog Artifactory automatically",
+          "Deployment triggered by the pipeline, not by a person",
+          "Pipelines standardised with GitLab CI/CD and Jenkins across environments",
+        ],
+      },
+    ],
+    diagram: {
+      title: "ARAS delivery pipeline",
+      steps: [
+        { label: "ZIP received", detail: "ARAS package" },
+        { label: "Extract", detail: "Jenkins stage" },
+        { label: "Env naming", detail: "INT · VAL · PROD" },
+        { label: "Publish", detail: "JFrog Artifactory" },
+        { label: "Deploy", detail: "Jenkins job" },
+      ],
+    },
+    results: [
+      { value: "2h→15m", label: "Deployment time" },
+      { value: "3", label: "Environments, one pipeline" },
+      { value: "0", label: "Manual upload or trigger steps left" },
+    ],
+    stack: ["Jenkins", "GitLab CI/CD", "JFrog Artifactory", "Python", "Bash"],
+  },
+  {
+    slug: "pensions-platform-pipelines",
+    pillar: "cicd-automation",
+    verified: true,
+    title: "80% of manual deployment work removed",
+    summary: "Jenkins pipelines, Docker and Helm for a high-availability Java pensions and long-term savings website.",
+    sector: "Financial services",
+    client: "Pensions & savings platform · via TCS",
+    role: "System Engineer",
+    duration: "01/2021 – 07/2022",
+    blocks: [
+      {
+        heading: "Context",
+        body: "A highly available Java pensions and long-term savings website on a hybrid setup: on-prem plus AWS Kubernetes, managed with Terraform. Deployments leaned on manual steps and on ops.",
+      },
+      {
+        heading: "What I owned",
+        bullets: ["Jenkins pipeline scripts and their upkeep", "Dockerfiles for Java services", "Helm charts and the pipelines that use them"],
+      },
+      {
+        heading: "Strategy & approach",
+        body: "Automate the deploy path end to end and give developers a self-service way to release.",
+      },
+      {
+        heading: "Execution",
+        bullets: [
+          "Jenkins CI/CD with Ansible, Nexus and SonarQube quality gates",
+          "Helm charts and pipelines that reduced developers' dependency on ops",
+          "Supported blue-green deployments in production to cut downtime and release risk",
+          "Locust load testing before releases",
         ],
       },
     ],
     diagram: {
       title: "Release pipeline",
       steps: [
-        { label: "Commit", detail: "PR + review" },
-        { label: "Build", detail: "Docker, cached" },
-        { label: "Test", detail: "Unit + contract" },
-        { label: "Scan", detail: "SAST + Trivy" },
-        { label: "Change", detail: "Auto ServiceNow" },
-        { label: "Deploy", detail: "ArgoCD canary" },
+        { label: "Commit", detail: "Git workflow" },
+        { label: "Build", detail: "Jenkins + Docker" },
+        { label: "Quality gate", detail: "SonarQube" },
+        { label: "Artefact", detail: "Nexus" },
+        { label: "Deploy", detail: "Helm, blue-green" },
       ],
     },
     results: [
-      { value: "45→8 min", label: "Release time" },
-      { value: "2→40", label: "Deploys per week" },
-      { value: "-71%", label: "Failed changes" },
-      { value: "3→0", label: "Engineers per release" },
+      { value: "80%", label: "Manual deployment effort removed" },
+      { value: "Blue-green", label: "Production releases with less downtime" },
     ],
-    stack: ["GitHub Actions", "ArgoCD", "EKS", "Trivy", "SonarQube", "ServiceNow API"],
-  },
-  {
-    slug: "healthcare-test-automation",
-    pillar: "cicd-automation",
-    title: "120 hours of manual work removed every month",
-    summary: "Automated environment refresh, test data and release notes for a healthtech product team.",
-    sector: "Healthcare",
-    client: "Healthtech scale-up · Patient records SaaS",
-    role: "DevOps Engineer",
-    duration: "4 months",
-    blocks: [
-      {
-        heading: "Context",
-        body: "QA spent two days every sprint rebuilding test environments and anonymising patient data by hand. Release notes were written from memory.",
-      },
-      {
-        heading: "What I owned",
-        bullets: ["Ephemeral environment workflow", "Data anonymisation job", "Release-note generator"],
-      },
-      {
-        heading: "Strategy & approach",
-        body: "Treat every manual task as a pipeline step waiting to be written. Measure hours spent first, automate the biggest block first.",
-      },
-      {
-        heading: "Execution",
-        bullets: [
-          "Per-PR preview environments spun up and torn down by GitLab CI",
-          "Nightly anonymised snapshot of production data, HIPAA-safe by design",
-          "Release notes built from conventional commits and Jira tickets",
-        ],
-      },
-    ],
-    diagram: {
-      title: "Preview environment flow",
-      steps: [
-        { label: "Open PR", detail: "GitLab MR" },
-        { label: "Provision", detail: "Terraform workspace" },
-        { label: "Seed data", detail: "Anonymised snapshot" },
-        { label: "Test", detail: "E2E suite" },
-        { label: "Tear down", detail: "On merge" },
-      ],
-    },
-    results: [
-      { value: "120 h", label: "Saved per month" },
-      { value: "2 days→25 min", label: "Test env refresh" },
-      { value: "0", label: "PHI in test envs" },
-    ],
-    stack: ["GitLab CI", "Terraform", "AWS RDS", "Python", "Jira API"],
+    stack: ["Jenkins", "Ansible", "Nexus", "SonarQube", "Docker", "Helm", "Locust"],
   },
 
   // 02 — IaC
   {
-    slug: "terraform-module-library",
+    slug: "optum-reusable-modules",
     pillar: "infrastructure-as-code",
-    title: "A Terraform module library 34 teams build on",
-    summary: "Turned three days of ticket-driven provisioning into a 40-minute pull request.",
-    sector: "Banking",
-    client: "Investment bank · Cloud platform team",
-    role: "Platform / IaC Lead",
-    duration: "9 months",
+    verified: true,
+    title: "Reusable modules across 50+ repositories",
+    summary: "Standardised Terraform, CloudFormation, ARM and Ansible modules. Provisioning went from 5 hours to 1.5.",
+    sector: "Healthcare",
+    client: "Optum Global Solutions",
+    role: "Cloud Infrastructure Engineer",
+    duration: "07/2022 – 07/2024",
     blocks: [
       {
         heading: "Goal",
-        body: "Consistent, compliant AWS environments in minutes. Fewer hand-built resources, fewer surprises at audit.",
+        body: "Consistent, faster provisioning across AWS and Azure in a HIPAA-regulated environment, with fewer one-off builds.",
       },
-      {
-        heading: "Tools used",
-        bullets: ["Terraform + Terragrunt", "Private module registry", "tflint, Checkov, OPA", "Atlantis for plan/apply"],
-      },
-      {
-        heading: "Environments covered",
-        body: "Dev, test, pre-prod and prod across 48 AWS accounts in 2 regions.",
-      },
+      { heading: "Tools used", bullets: ["Terraform", "CloudFormation", "ARM templates", "Ansible"] },
+      { heading: "Environments covered", body: "AWS and Azure, across 50+ product repositories." },
       {
         heading: "Design approach",
-        bullets: [
-          "Small, versioned modules: network, compute, data, identity",
-          "Opinionated defaults: encryption, logging and tags on by default",
-          "Composition via Terragrunt — one folder per environment, no duplication",
-        ],
+        body: "Shared modules for the common building blocks, reused by every repository instead of rewritten in each.",
       },
       {
         heading: "Execution",
         bullets: [
-          "Imported 1,900 hand-built resources into state",
-          "Policy-as-code gate on every PR",
-          "Self-service catalogue: teams request an environment with one YAML file",
+          "Rolled reusable modules out across 50+ repositories",
+          "Ran proofs of concept (ADF with Databricks, customised EMR Serverless images) and wrote the Terraform",
+          "Presented PoC results and recommendations to product teams",
         ],
       },
     ],
     diagram: {
       title: "Provisioning flow",
       steps: [
-        { label: "Request", detail: "env.yaml PR" },
-        { label: "Lint", detail: "fmt + tflint" },
-        { label: "Policy", detail: "Checkov + OPA" },
-        { label: "Plan", detail: "Atlantis review" },
-        { label: "Apply", detail: "Per-account role" },
+        { label: "Module", detail: "Shared library" },
+        { label: "Compose", detail: "Per repository" },
+        { label: "Plan", detail: "Terraform" },
+        { label: "Apply", detail: "AWS / Azure" },
+        { label: "Configure", detail: "Ansible" },
       ],
     },
     results: [
-      { value: "40 min", label: "New environment (was 3 days)" },
-      { value: "34", label: "Repos standardised" },
-      { value: "-90%", label: "Drift incidents" },
-      { value: "1,900", label: "Resources brought under code" },
+      { value: "5h→1.5h", label: "Provisioning time" },
+      { value: "50+", label: "Repositories standardised" },
     ],
-    stack: ["Terraform", "Terragrunt", "Atlantis", "Checkov", "OPA", "AWS"],
+    stack: ["Terraform", "CloudFormation", "ARM", "Ansible", "AWS", "Azure"],
   },
   {
-    slug: "aerospace-ansible-baseline",
+    slug: "optum-ops-automation",
     pillar: "infrastructure-as-code",
-    title: "One baseline for 400 engineering servers",
-    summary: "Replaced hand-patched servers with Ansible and CloudFormation baselines for an aerospace supplier.",
-    sector: "Aerospace",
-    client: "Aerospace MRO supplier · Engineering systems",
-    role: "DevOps Engineer",
-    duration: "5 months",
+    verified: true,
+    title: "25% less manual ops work, in code",
+    summary: "Automated VM scheduling, IAM key rotation and AMI distribution with Terraform and AWS Image Builder.",
+    sector: "Healthcare",
+    client: "Optum Global Solutions",
+    role: "Cloud Infrastructure Engineer",
+    duration: "07/2022 – 07/2024",
     blocks: [
-      {
-        heading: "Goal",
-        body: "Every server built the same way, every change traceable. Pass AS9100 change-control audits without a scramble.",
-      },
-      { heading: "Tools used", bullets: ["Ansible + AWX", "CloudFormation StackSets", "AWS SSM"] },
-      { heading: "Environments covered", body: "Validation, staging and production — 400 Linux and Windows hosts." },
-      {
-        heading: "Design approach",
-        body: "Roles per server type, CIS hardening as a shared role, and StackSets for the account-level guardrails.",
-      },
+      { heading: "Goal", body: "Stop doing recurring operational chores by hand." },
+      { heading: "Tools used", bullets: ["Terraform", "AWS Image Builder", "IAM"] },
+      { heading: "Environments covered", body: "AWS workloads supporting internal healthcare products." },
       {
         heading: "Execution",
         bullets: [
-          "Rebuilt 400 hosts in rolling waves with zero unplanned downtime",
-          "Patch cycle moved to SSM maintenance windows",
-          "Every change logged against a ticket ID",
+          "VM start/stop schedules defined in Terraform",
+          "IAM access keys rotated automatically",
+          "AMIs built and distributed with AWS Image Builder",
         ],
       },
     ],
     diagram: {
-      title: "Baseline rollout",
+      title: "Automated ops",
       steps: [
-        { label: "Change", detail: "Ticket + PR" },
-        { label: "Validate", detail: "Molecule tests" },
-        { label: "Stage", detail: "AWX canary" },
-        { label: "Roll out", detail: "Waves of 10%" },
-        { label: "Evidence", detail: "Audit log" },
+        { label: "Schedule", detail: "VM on/off" },
+        { label: "Rotate", detail: "IAM keys" },
+        { label: "Build", detail: "Image Builder AMI" },
+        { label: "Distribute", detail: "Across accounts" },
       ],
     },
-    results: [
-      { value: "-85%", label: "Config errors" },
-      { value: "6 h→20 min", label: "Server build" },
-      { value: "0", label: "Audit findings" },
-    ],
-    stack: ["Ansible", "AWX", "CloudFormation", "SSM", "Molecule"],
+    results: [{ value: "-25%", label: "Manual effort" }],
+    stack: ["Terraform", "AWS Image Builder", "IAM", "EC2"],
   },
 
   // 03 — Platforms
   {
-    slug: "eks-payments-platform",
+    slug: "natwest-serverless-platform",
     pillar: "cloud-platforms",
-    title: "A multi-region EKS platform for 140 services",
-    summary: "Moved a bank's payments estate from VMs to EKS and held 99.95% availability through peak season.",
+    verified: true,
+    title: "Serverless pipelines for a bank, at 99.9% uptime",
+    summary: "Terraform landing zones, event-driven ETL and an Amazon Connect contact centre for NatWest.",
     sector: "Banking",
-    client: "Tier-1 retail bank · Payments platform",
-    role: "Platform Engineer",
-    duration: "10 months",
+    client: "NatWest · via Infosys",
+    role: "Associate Consultant, Cloud Infrastructure",
+    duration: "Infosys, 2024 – 2026",
     blocks: [
       {
         heading: "Platform architecture",
-        body: "Two AWS regions, active-active. Shared networking account with Transit Gateway; one account per workload tier.",
-      },
-      {
-        heading: "Kubernetes & container setup",
-        bullets: [
-          "EKS with Karpenter for node autoscaling",
-          "Helm base charts with probes, limits and PDBs set by default",
-          "IRSA for pod-level AWS access — no node-wide credentials",
-        ],
+        body: "Multi-account AWS landing zones, VPC networking and ECS/ECR container workloads, built in Terraform.",
       },
       {
         heading: "Serverless & event-driven",
-        body: "Settlement and notification jobs moved to Lambda + SQS. They scale to zero overnight.",
+        bullets: [
+          "ETL pipelines orchestrated with Lambda, Step Functions, EventBridge and DynamoDB",
+          "Amazon Connect contact flows with Amazon Lex chatbots and voice, integrated with Lambda, S3 and DynamoDB",
+          "Amazon Bedrock GenAI proof of concept with Lambda",
+        ],
       },
       {
-        heading: "Execution",
-        bullets: [
-          "Migrated 140 services in 6 waves, each with a rollback path",
-          "Load-tested to 6× normal peak before cut-over",
-        ],
+        heading: "Kubernetes & containers",
+        body: "Supported Kubernetes workloads on AWS EKS across development, testing and production.",
+      },
+      {
+        heading: "Operations",
+        body: "CloudWatch dashboards and alarms, Python/boto3 automation, on-call rotations and L2/L3 incidents with root-cause analysis.",
       },
     ],
     diagram: {
-      title: "Platform architecture",
+      title: "Event-driven ETL",
       steps: [
-        { label: "Route 53", detail: "Latency routing" },
-        { label: "ALB", detail: "Per region" },
-        { label: "EKS", detail: "Karpenter nodes" },
-        { label: "SQS / Lambda", detail: "Async jobs" },
-        { label: "Aurora Global", detail: "Cross-region" },
+        { label: "EventBridge", detail: "Triggers" },
+        { label: "Step Functions", detail: "Orchestration" },
+        { label: "Lambda", detail: "Transform" },
+        { label: "DynamoDB", detail: "Store" },
+        { label: "CloudWatch", detail: "Alarms" },
       ],
     },
-    results: [
-      { value: "99.95%", label: "Availability" },
-      { value: "6×", label: "Peak absorbed" },
-      { value: "-40%", label: "Compute cost per txn" },
-    ],
-    stack: ["EKS", "Karpenter", "Helm", "Lambda", "SQS", "Aurora", "Route 53"],
+    results: [{ value: "99.9%", label: "ETL pipeline uptime" }],
+    stack: ["Terraform", "Lambda", "Step Functions", "EventBridge", "DynamoDB", "Amazon Connect", "Lex", "Bedrock"],
   },
   {
-    slug: "serverless-imaging-pipeline",
+    slug: "hybrid-kubernetes-platform",
     pillar: "cloud-platforms",
-    title: "Serverless pipeline for medical imaging uploads",
-    summary: "An event-driven ingest path that handles 10× spikes without a single always-on server.",
-    sector: "Healthcare",
-    client: "Diagnostics provider · Imaging platform",
-    role: "Cloud Engineer",
-    duration: "3 months",
+    verified: true,
+    title: "One app, two runtimes: on-prem and AWS EKS",
+    summary: "Kept a pensions website highly available across on-prem Kubernetes and AWS EKS, managed with Terraform.",
+    sector: "Financial services",
+    client: "Pensions & savings platform · via TCS",
+    role: "System Engineer",
+    duration: "01/2021 – 07/2022",
     blocks: [
       {
         heading: "Platform architecture",
-        body: "Uploads land in S3, EventBridge routes them, Step Functions run validation, de-identification and indexing.",
+        body: "Hybrid setup: on-prem Kubernetes alongside AWS EKS, with EC2, load balancers and S3 managed through Terraform.",
       },
       {
-        heading: "Serverless & event-driven",
-        bullets: ["S3 event notifications into EventBridge", "Step Functions with retries and DLQs", "Lambda for de-identification"],
+        heading: "Kubernetes & containers",
+        bullets: [
+          "Dockerfiles for Java microservices",
+          "Helm deployments to both clusters",
+          "Pod health, logs and cluster events monitored in prod and non-prod",
+        ],
       },
       {
-        heading: "Execution",
-        body: "Built in Terraform, deployed through the same CI as the rest of the estate. Full trace in X-Ray for every file.",
+        heading: "Impact",
+        body: "Blue-green releases in production reduced downtime and release risk.",
       },
     ],
     diagram: {
-      title: "Event-driven ingest",
+      title: "Hybrid platform",
       steps: [
-        { label: "S3 upload", detail: "KMS encrypted" },
-        { label: "EventBridge", detail: "Routing rules" },
-        { label: "Step Functions", detail: "Orchestration" },
-        { label: "Lambda", detail: "De-identify" },
-        { label: "Index", detail: "DynamoDB" },
+        { label: "Docker", detail: "Java services" },
+        { label: "Helm", detail: "One chart" },
+        { label: "On-prem K8s", detail: "Cluster 1" },
+        { label: "AWS EKS", detail: "Cluster 2" },
+        { label: "ELB / S3", detail: "Terraform" },
       ],
     },
-    results: [
-      { value: "10×", label: "Spike handled" },
-      { value: "-62%", label: "Running cost" },
-      { value: "<2 s", label: "Median processing" },
-    ],
-    stack: ["S3", "EventBridge", "Step Functions", "Lambda", "DynamoDB", "X-Ray"],
+    results: [{ value: "2", label: "Runtimes, one deployment path" }],
+    stack: ["Kubernetes", "AWS EKS", "Terraform", "Docker", "Helm", "CloudWatch", "ELK"],
   },
 
   // 04 — Reliability
   {
-    slug: "observability-overhaul",
+    slug: "airbus-production-reliability",
     pillar: "reliability",
-    title: "Cut P1 incidents by 64% with SLO-based alerting",
-    summary: "Replaced 900 noisy alerts with 60 that mattered, and halved time to recover.",
-    sector: "Healthcare",
-    client: "Healthtech scale-up · Patient records SaaS",
-    role: "SRE / DevOps Engineer",
-    duration: "6 months",
+    verified: true,
+    title: "Keeping Airbus DevOps platforms up across 3 environments",
+    summary: "Incident response, RCA, upgrades with minimal downtime and validated failover for enterprise platforms.",
+    sector: "Aerospace",
+    client: "Airbus · via Infosys",
+    role: "Associate → Senior Associate Consultant",
+    duration: "08/2024 – 07/2026",
     blocks: [
       {
         heading: "Monitoring stack",
-        body: "Prometheus and Grafana for services, ELK for logs, CloudWatch for managed AWS services — joined by trace IDs.",
+        body: "Grafana, Prometheus and Datadog for AWS EKS workloads, supporting SLI/SLO monitoring and SLA compliance.",
       },
       {
         heading: "Alerting & incident handling",
         bullets: [
-          "SLOs defined with each product team for their top 3 user journeys",
-          "Burn-rate alerts replaced static thresholds",
-          "Every alert links to a runbook; on-call rota shared with developers",
+          "Led incident response and root-cause analysis for high-volume pipeline job failures and script errors",
+          "Resolved pipeline, authentication and IAM/RBAC issues in production",
         ],
+      },
+      {
+        heading: "Disaster recovery approach",
+        body: "High availability and DR with Terraform, Auto Scaling, ALB, RDS replication and CloudWatch. Failover procedures validated and recovery runbooks written.",
       },
       {
         heading: "Collaboration with development teams",
-        body: "Weekly reliability review with each team. Blameless post-mortems with tracked actions, not just a document.",
+        body: "Worked directly with Airbus stakeholders. Wrote runbooks, installation guides and knowledge transfer packs in Confluence.",
       },
       {
         heading: "Production troubleshooting",
-        body: "Led the bridge on 30+ incidents. Root causes ranged from DNS caching to a connection-pool leak found with flame graphs.",
+        body: "Jira upgrades in INT and VAL with minimal downtime; production fixes for job failures, scripts and UI issues.",
       },
     ],
     diagram: {
-      title: "Observability flow",
+      title: "Recovery path",
       steps: [
-        { label: "Services", detail: "OTel SDK" },
-        { label: "Prometheus", detail: "Metrics" },
-        { label: "ELK", detail: "Logs" },
-        { label: "Grafana", detail: "SLO dashboards" },
-        { label: "PagerDuty", detail: "Burn-rate pages" },
+        { label: "Detect", detail: "CloudWatch / Datadog" },
+        { label: "Scale", detail: "Auto Scaling" },
+        { label: "Route", detail: "ALB" },
+        { label: "Fail over", detail: "RDS replica" },
+        { label: "Runbook", detail: "Confluence" },
       ],
     },
     results: [
-      { value: "-64%", label: "P1 incidents" },
-      { value: "4h→35m", label: "MTTR" },
-      { value: "900→60", label: "Alert rules" },
-      { value: "99.95%", label: "Uptime" },
+      { value: "3", label: "Environments: INT, VAL, PROD" },
+      { value: "Tested", label: "Failover procedures, documented" },
     ],
-    stack: ["Prometheus", "Grafana", "ELK", "CloudWatch", "OpenTelemetry", "PagerDuty"],
+    stack: ["AWS EKS", "Prometheus", "Grafana", "Datadog", "Terraform", "RDS", "CloudWatch"],
   },
   {
-    slug: "cross-region-dr",
+    slug: "optum-uptime-monitoring",
     pillar: "reliability",
-    title: "Disaster recovery that's tested every quarter",
-    summary: "Designed and rehearsed cross-region DR for a bank's lending platform. RTO went from unknown to 15 minutes.",
-    sector: "Banking",
-    client: "Challenger bank · Lending platform",
-    role: "DevOps Engineer",
-    duration: "4 months",
+    verified: true,
+    title: "Healthcare platforms held at 99% uptime",
+    summary: "CloudWatch monitoring, IAM policies and AWS Inspector — with no critical issues.",
+    sector: "Healthcare",
+    client: "Optum Global Solutions",
+    role: "Cloud Infrastructure Engineer",
+    duration: "07/2022 – 07/2024",
     blocks: [
+      { heading: "Monitoring stack", body: "AWS CloudWatch for real-time monitoring of serverless and infrastructure workloads." },
       {
-        heading: "Disaster recovery approach",
-        bullets: [
-          "Pilot-light standby in a second region, built from the same Terraform",
-          "Aurora Global Database with 1-second replication lag",
-          "Route 53 health checks with scripted failover",
-        ],
+        heading: "Alerting & incident handling",
+        body: "Resolved L2/L3 infrastructure incidents and daily user blockers through ServiceNow.",
       },
       {
-        heading: "Execution",
-        body: "Quarterly game days with the dev teams. The first drill took 3 hours; by the fourth it took 15 minutes.",
+        heading: "Collaboration with development teams",
+        body: "Documented issues, fixes and architectures on the internal wiki so the whole team could troubleshoot faster.",
       },
     ],
     diagram: {
-      title: "Failover path",
+      title: "Monitoring loop",
       steps: [
-        { label: "Health check", detail: "Route 53" },
-        { label: "Promote DB", detail: "Aurora Global" },
-        { label: "Scale up", detail: "Standby EKS" },
-        { label: "Switch DNS", detail: "Weighted records" },
-        { label: "Verify", detail: "Synthetic checks" },
+        { label: "Collect", detail: "CloudWatch" },
+        { label: "Scan", detail: "AWS Inspector" },
+        { label: "Ticket", detail: "ServiceNow" },
+        { label: "Fix", detail: "L2/L3" },
+        { label: "Document", detail: "Wiki" },
       ],
     },
     results: [
-      { value: "15 min", label: "RTO" },
-      { value: "<1 s", label: "RPO" },
-      { value: "4/4", label: "Drills passed" },
+      { value: "99%", label: "Uptime" },
+      { value: "0", label: "Critical issues" },
     ],
-    stack: ["Aurora Global", "Route 53", "AWS Backup", "Terraform", "EKS"],
+    stack: ["CloudWatch", "AWS Inspector", "IAM", "ServiceNow"],
   },
 
   // 05 — Security
   {
-    slug: "hipaa-devsecops",
+    slug: "hipaa-devsecops-migration",
     pillar: "security-compliance",
-    title: "HIPAA audit passed with zero critical findings",
-    summary: "Put security controls into the pipeline so audit evidence generated itself.",
+    verified: true,
+    title: "Jenkins to GitHub Actions, with zero critical findings",
+    summary: "Migrated CI/CD to GitHub Actions and Azure DevOps with DevSecOps controls in a HIPAA-regulated environment.",
     sector: "Healthcare",
-    client: "Healthtech scale-up · Patient records SaaS",
-    role: "DevSecOps Engineer",
-    duration: "5 months",
+    client: "Optum Global Solutions",
+    role: "Cloud Infrastructure Engineer",
+    duration: "07/2022 – 07/2024",
     blocks: [
-      {
-        heading: "Compliance context",
-        body: "First external HIPAA audit in 6 months. Evidence lived in screenshots and spreadsheets.",
-      },
+      { heading: "Compliance context", body: "Healthcare workloads under HIPAA. Security issues had to be caught before production, not after." },
       {
         heading: "Access control",
-        bullets: ["SSO-only AWS access via IAM Identity Center", "Just-in-time admin with 1-hour sessions", "Kubernetes RBAC mapped to team groups"],
-      },
-      {
-        heading: "Secrets management",
-        bullets: ["KMS customer-managed keys per data class", "Secrets Manager with 30-day rotation", "Pre-commit and CI secret scanning"],
+        bullets: ["IAM policies scoped per workload", "Automated IAM key rotation"],
       },
       {
         heading: "Execution",
-        body: "AWS Config rules and Security Hub standards as code. A nightly job exported evidence to an immutable S3 bucket for the auditor.",
-      },
-    ],
-    diagram: {
-      title: "DevSecOps controls",
-      steps: [
-        { label: "Code", detail: "Secret scan" },
-        { label: "Build", detail: "SAST + SCA" },
-        { label: "Image", detail: "Trivy + signing" },
-        { label: "Deploy", detail: "OPA admission" },
-        { label: "Runtime", detail: "Security Hub" },
-      ],
-    },
-    results: [
-      { value: "0", label: "Critical findings" },
-      { value: "-95%", label: "Standing admin access" },
-      { value: "3 wks→2 days", label: "Audit prep" },
-    ],
-    stack: ["IAM Identity Center", "KMS", "Secrets Manager", "Security Hub", "AWS Config", "OPA"],
-  },
-  {
-    slug: "bank-least-privilege",
-    pillar: "security-compliance",
-    title: "Least privilege across 48 AWS accounts",
-    summary: "Replaced wildcard IAM policies with roles generated from real usage data.",
-    sector: "Banking",
-    client: "Investment bank · Cloud platform team",
-    role: "Cloud Security / DevOps",
-    duration: "4 months",
-    blocks: [
-      {
-        heading: "Compliance context",
-        body: "Internal risk review flagged 300+ roles with wildcard permissions. Regulator follow-up due in one quarter.",
-      },
-      {
-        heading: "Access control",
         bullets: [
-          "IAM Access Analyzer to generate policies from 90 days of CloudTrail",
-          "Permission boundaries on every team role",
-          "SCPs blocking risky actions at the organisation level",
+          "Migrated Jenkins pipelines to GitHub Actions and Azure DevOps",
+          "Added DevSecOps controls, quality gates and vulnerability remediation to the pipeline",
+          "AWS Inspector scanning on cloud resources",
         ],
       },
-      { heading: "Execution", body: "Rolled out per account with a 2-week shadow mode, so nothing broke in production." },
     ],
     diagram: {
-      title: "Policy generation",
+      title: "DevSecOps pipeline",
       steps: [
-        { label: "CloudTrail", detail: "90 days of usage" },
-        { label: "Analyzer", detail: "Generate policy" },
-        { label: "Review", detail: "Team sign-off" },
-        { label: "Shadow", detail: "2 weeks" },
-        { label: "Enforce", detail: "Terraform apply" },
+        { label: "Code", detail: "GitHub" },
+        { label: "Build", detail: "GitHub Actions" },
+        { label: "Quality gate", detail: "Scans" },
+        { label: "Deploy", detail: "Azure DevOps" },
+        { label: "Runtime", detail: "AWS Inspector" },
       ],
     },
     results: [
-      { value: "300→0", label: "Wildcard roles" },
-      { value: "0", label: "Production breakages" },
-      { value: "1 qtr", label: "Closed before deadline" },
+      { value: "0", label: "Critical security findings" },
+      { value: "HIPAA", label: "Regulated environment" },
     ],
-    stack: ["IAM", "Access Analyzer", "CloudTrail", "SCPs", "Terraform"],
+    stack: ["GitHub Actions", "Azure DevOps", "IAM", "AWS Inspector"],
+  },
+  {
+    slug: "airbus-token-auth",
+    pillar: "security-compliance",
+    verified: true,
+    title: "Passwords out, tokens in: securing Airbus DevOps tools",
+    summary: "OAuth2 and token-based authentication across Jenkins, Artifactory and Jira, plus Jenkins RBAC.",
+    sector: "Aerospace",
+    client: "Airbus · via Infosys",
+    role: "Associate → Senior Associate Consultant",
+    duration: "08/2024 – 07/2026",
+    blocks: [
+      { heading: "Compliance context", body: "Enterprise security standards required moving off password-based authentication." },
+      {
+        heading: "Access control",
+        bullets: ["Implemented OAuth2 and token-based access", "Configured Jenkins RBAC to control job visibility and user access"],
+      },
+      {
+        heading: "Secrets management",
+        body: "Migrated Jenkins pipelines from artifactoryPassword to artifactoryToken and fixed the authentication failures that followed.",
+      },
+      {
+        heading: "Execution",
+        body: "Fixed Jira SIL OAuth2 SSO by adding the missing Bearer token to the authorization header.",
+      },
+    ],
+    diagram: {
+      title: "Auth migration",
+      steps: [
+        { label: "Password", detail: "Legacy" },
+        { label: "Token", detail: "Artifactory" },
+        { label: "OAuth2", detail: "Jira SIL SSO" },
+        { label: "RBAC", detail: "Jenkins" },
+      ],
+    },
+    results: [
+      { value: "OAuth2", label: "Token-based auth live" },
+      { value: "RBAC", label: "Jenkins jobs scoped by role" },
+    ],
+    stack: ["Jenkins", "JFrog Artifactory", "Jira", "OAuth2"],
   },
 
   // 06 — Cost
   {
-    slug: "aws-cost-reduction",
+    slug: "optum-cloud-cost-reduction",
     pillar: "cost-optimisation",
-    title: "38% off the AWS bill without slowing anyone down",
-    summary: "A FinOps programme that saved £410k a year and made every team own its spend.",
-    sector: "Aerospace",
-    client: "Aerospace manufacturer · Digital engineering",
-    role: "DevOps / FinOps Lead",
-    duration: "6 months",
+    verified: true,
+    title: "20% off AWS and Azure costs",
+    summary: "Rightsizing, reserved instances, lifecycle rules and Cloud Custodian policies in a healthcare environment.",
+    sector: "Healthcare",
+    client: "Optum Global Solutions",
+    role: "Cloud Infrastructure Engineer",
+    duration: "07/2022 – 07/2024",
     blocks: [
       {
         heading: "Cost optimisation strategy",
-        body: "Visibility first, then quick wins, then commitments. No savings plan until the baseline was clean.",
+        body: "Monitor serverless and infrastructure usage first, then cut what isn't earning its keep.",
       },
       {
         heading: "Tools & methods",
         bullets: [
-          "Tag policy enforced by SCP; untagged resources blocked",
-          "CUR + Athena + Grafana for per-team cost dashboards",
-          "Compute Optimizer right-sizing and Graviton migration",
-          "Non-prod scheduled off 7pm–7am and weekends",
-          "Savings Plans sized to 70% of steady-state compute",
+          "Rightsizing and reserved instances",
+          "Storage lifecycle rules",
+          "Cloud Custodian policies",
+          "On-demand EMR for serverless workloads",
+          "Tracked in AWS Cost Explorer and Azure Cost Management",
         ],
-      },
-      {
-        heading: "Execution",
-        body: "Weekly 15-minute cost review with each team lead. Budget alerts at 80% and 100% of forecast.",
       },
     ],
     diagram: {
       title: "FinOps loop",
       steps: [
-        { label: "Tag", detail: "Owner + env" },
-        { label: "Measure", detail: "CUR + Athena" },
-        { label: "Right-size", detail: "Optimizer" },
-        { label: "Schedule", detail: "Non-prod off" },
-        { label: "Commit", detail: "Savings Plans" },
+        { label: "Measure", detail: "Cost Explorer" },
+        { label: "Right-size", detail: "Compute" },
+        { label: "Reserve", detail: "Baseline" },
+        { label: "Clean up", detail: "Cloud Custodian" },
+        { label: "Track", detail: "Azure Cost Mgmt" },
       ],
     },
-    results: [
-      { value: "-38%", label: "AWS bill" },
-      { value: "£410k", label: "Saved per year" },
-      { value: "100%", label: "Spend with an owner" },
-    ],
-    stack: ["Cost Explorer", "CUR", "Athena", "Compute Optimizer", "Graviton", "AWS Budgets"],
+    results: [{ value: "-20%", label: "AWS & Azure costs" }],
+    stack: ["AWS Cost Explorer", "Azure Cost Management", "Cloud Custodian", "EMR"],
   },
 ];
 
@@ -887,41 +856,18 @@ export type Project = Verifiable & {
   repo: string;
 };
 
-export const projects: Project[] = [
-  {
-    name: "eks-blueprint",
-    description: "Production-ready EKS in one terraform apply: VPC, Karpenter, ArgoCD and observability included.",
-    architecture: "3-AZ VPC · EKS · Karpenter · ArgoCD app-of-apps",
-    pipeline: "GitHub Actions: fmt → tflint → Checkov → plan → apply",
-    stack: ["Terraform", "EKS", "ArgoCD", "Helm"],
-    repo: "https://github.com/nehlakj/eks-blueprint",
-  },
-  {
-    name: "cost-sentinel",
-    description: "Serverless bot that posts daily AWS cost changes and idle resources to Slack.",
-    architecture: "EventBridge schedule · Lambda · Cost Explorer API · Slack webhook",
-    pipeline: "GitHub Actions: pytest → SAM build → deploy",
-    stack: ["Python", "Lambda", "SAM", "Cost Explorer"],
-    repo: "https://github.com/nehlakj/cost-sentinel",
-  },
-  {
-    name: "slo-kit",
-    description: "Drop-in Prometheus rules and Grafana dashboards for SLO burn-rate alerting.",
-    architecture: "Prometheus recording rules · Alertmanager · Grafana JSON",
-    pipeline: "promtool test → dashboard lint → release",
-    stack: ["Prometheus", "Grafana", "Jsonnet"],
-    repo: "https://github.com/nehlakj/slo-kit",
-  },
-];
+/** Personal GitHub projects. Empty until real repos are shared. */
+export const projects: Project[] = [];
 
 /** True while any sample content is still on the site. */
 export function hasPlaceholders() {
+  const contactKeys = ["email", "linkedin", "github"] as const;
   return (
     headlineMetrics.some(isPlaceholder) ||
     pillars.some((p) => p.metrics.some(isPlaceholder)) ||
     caseStudies.some(isPlaceholder) ||
     projects.some(isPlaceholder) ||
-    Object.values(contactVerified).some((v) => !v)
+    contactKeys.some((k) => profile[k] !== null && !contactVerified[k])
   );
 }
 
