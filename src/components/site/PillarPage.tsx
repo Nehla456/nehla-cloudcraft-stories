@@ -1,7 +1,7 @@
 import { Link } from "@tanstack/react-router";
 import { ArrowRight, ArrowUpRight, Github } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { caseStudiesFor, getPillar, isPlaceholder, pillars, projects, type PillarSlug } from "@/data/portfolio";
+import { caseStudiesFor, getPillar, isPlaceholder, pillars, profile, projects, type PillarSlug } from "@/data/portfolio";
 import { PlaceholderTag } from "./Placeholder";
 import { CaseStudyCard } from "./CaseStudyCard";
 import { MetricStat } from "./MetricStat";
@@ -92,9 +92,25 @@ export function PillarPage({ slug }: { slug: PillarSlug }) {
             <p className="eyebrow text-primary">Personal & open-source</p>
             <h2 className="mt-3 text-4xl font-bold md:text-5xl">Built on my own time.</h2>
             <p className="mt-4 max-w-xl text-muted-foreground">
-              Small, sharp tools I use to test ideas before they go near a client's production.
+              Personal infrastructure projects, outside client work.
             </p>
           </Reveal>
+          {projects.length === 0 && (
+            <Reveal className="mt-12 rounded-3xl border-2 border-dashed border-border p-8 md:p-10">
+              <p className="font-display text-2xl font-bold">New repos on the way.</p>
+              <p className="mt-3 max-w-xl text-muted-foreground">
+                I'm publishing small infrastructure projects — Terraform modules, pipelines, monitoring setups. They'll
+                appear here with their architecture, pipeline and stack.
+              </p>
+              {profile.github && (
+                <Button asChild variant="outlineBold" className="mt-6 rounded-full">
+                  <a href={profile.github} target="_blank" rel="noreferrer">
+                    <Github /> Follow on GitHub
+                  </a>
+                </Button>
+              )}
+            </Reveal>
+          )}
           <div className="mt-12 grid gap-6 lg:grid-cols-3">
             {projects.map((p, i) => (
               <Reveal key={p.name} delay={i * 100} as="article" className="flex flex-col rounded-3xl border border-border bg-card p-7 shadow-card">
