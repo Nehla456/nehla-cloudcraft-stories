@@ -33,3 +33,5 @@ use the editor.
 - All portfolio copy (pages, case studies, metrics, projects, contact links) lives in `src/data/portfolio.ts`; pages render from it, so content edits never touch layout code.
 - Each work page is a thin route that renders the shared `PillarPage`; case studies open at `/work/$slug` — keeps one layout for all six pages.
 - The contact form opens a pre-filled email (no backend) — avoids storing visitor data until a backend is needed.
+- Metrics, case studies, projects and contact links are placeholders unless marked `verified: true` (contacts via `contactVerified`); the UI tags placeholders automatically so unverified claims are never shown as fact.
+- The CV download is driven by `cv.file` (a same-origin file in `public/downloads/`); the email request always stays as a fallback.
