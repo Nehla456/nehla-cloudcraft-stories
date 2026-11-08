@@ -61,7 +61,7 @@ function ContactPage() {
               Got something slow, fragile or <span className="text-gradient">expensive?</span>
             </h1>
             <p className="mt-6 max-w-md text-lg text-ink-muted">
-              Send me the problem and I'll tell you what I'd look at first. Based in {profile.location}, with {profile.workAuth.toLowerCase()}.
+              Send me the problem and I'll tell you what I'd look at first. Based in {profile.location}. {profile.workAuth}.
             </p>
             <ul className="mt-10 space-y-3">
               {[

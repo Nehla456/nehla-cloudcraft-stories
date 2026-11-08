@@ -92,7 +92,7 @@ export function PillarPage({ slug }: { slug: PillarSlug }) {
             <p className="eyebrow text-primary">Personal & open-source</p>
             <h2 className="mt-3 text-4xl font-bold md:text-5xl">Built on my own time.</h2>
             <p className="mt-4 max-w-xl text-muted-foreground">
-              Small, sharp tools I use to test ideas before they go near a client's production.
+              Personal infrastructure projects, outside client work.
             </p>
           </Reveal>
           {projects.length === 0 && (
