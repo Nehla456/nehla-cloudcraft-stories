@@ -10,6 +10,7 @@ import { PageShell } from "@/components/site/PageShell";
 import { Reveal } from "@/components/site/Reveal";
 import { certifications, contactVerified, profile } from "@/data/portfolio";
 import { CvActions } from "@/components/site/CvActions";
+import { CopyEmailButton } from "@/components/site/CopyEmailButton";
 import { PlaceholderTag } from "@/components/site/Placeholder";
 import { seo } from "@/lib/seo";
 
@@ -71,7 +72,7 @@ function ContactPage() {
                   ? [{ icon: Github, label: "GitHub", href: profile.github, ok: contactVerified.github }]
                   : []),
               ].map(({ icon: Icon, label, href, ok }) => (
-                <li key={label}>
+                <li key={label} className="flex flex-wrap items-center gap-3">
                   <a
                     href={href}
                     target={href.startsWith("http") ? "_blank" : undefined}
@@ -84,6 +85,7 @@ function ContactPage() {
                     {label}
                     {!ok && <PlaceholderTag tone="ink" />}
                   </a>
+                  {href.startsWith("mailto:") && <CopyEmailButton email={profile.email} compact />}
                 </li>
               ))}
             </ul>
