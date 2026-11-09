@@ -1,7 +1,6 @@
 import { Download, FileText } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cv, cvOptions, profile } from "@/data/portfolio";
-import { CopyEmailButton } from "./CopyEmailButton";
 
 export function CvActions() {
   const options = cvOptions(cv, profile.email);
@@ -23,7 +22,6 @@ export function CvActions() {
           </Button>
         ),
       )}
-      <CopyEmailButton email={profile.email} />
     </>
   );
 }
