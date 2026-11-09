@@ -3,7 +3,6 @@
 // is shown on the site with a "Placeholder" tag. Add `verified: true` only once confirmed.
 // Source of verified content: Nehla's CV (France Travail version) and her experience notes.
 
-import cvAsset from "@/assets/Nehla-KJ-CV.pdf.asset.json";
 
 /** Absence of `verified: true` means the item is a placeholder. */
 export type Verifiable = { verified?: true };
@@ -69,7 +68,8 @@ export const clientWork = [
 
 /** CV download. `file` is a same-origin URL; null shows only the email request. */
 export type CvConfig = { file: string | null; filename: string };
-export const cv: CvConfig = { file: cvAsset.url, filename: "Nehla-KJ-CV.pdf" };
+/** No public CV: each application gets a tailored CV, so visitors request it by email. */
+export const cv: CvConfig = { file: null, filename: "Nehla-KJ-CV.pdf" };
 
 export type CvOption =
   | { kind: "download"; href: string; filename: string }
